@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class ChatViewController: UIViewController {
 
@@ -19,10 +20,19 @@ class ChatViewController: UIViewController {
     var currentUser : String? = "anonymous"
     var lastId : Int? = 0
     
+    var ref: FIRDatabaseReference!
+    var students : [Student] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        ref = FIRDatabase.database().reference()
+        
+        studentTableView.delegate = self
+        studentTableView.dataSource = self
+        
+        listenToFirebase()
     }
 
     override func didReceiveMemoryWarning() {
