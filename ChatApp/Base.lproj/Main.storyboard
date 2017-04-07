@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="Swf-cB-BPd">
             <objects>
-                <viewController id="wsv-dG-8Hj" sceneMemberID="viewController">
+                <viewController id="wsv-dG-8Hj" customClass="ViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="E2g-Eu-P7w"/>
                         <viewControllerLayoutGuide type="bottom" id="yIT-lh-MA7"/>
@@ -40,6 +40,9 @@
                                 <state key="normal" title="Login">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="loginButtonTapped:" destination="wsv-dG-8Hj" eventType="touchUpInside" id="q2S-F3-mgw"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcom to the Chat App Please Enter Your Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yiu-r1-INg">
                                 <rect key="frame" x="80" y="113" width="215" height="152"/>
@@ -62,15 +65,18 @@
                             <constraint firstItem="yiu-r1-INg" firstAttribute="centerX" secondItem="5Cg-EV-flc" secondAttribute="centerX" id="tWw-Xj-66a"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="nameTextField" destination="5Cg-EV-flc" id="xqc-Y8-ktQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PRw-m4-cHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-829.60000000000002" y="133.5832083958021"/>
         </scene>
-        <!--View Controller-->
+        <!--Chat View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatViewController" id="BYZ-38-t0r" customClass="ChatViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
