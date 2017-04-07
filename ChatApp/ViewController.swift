@@ -13,7 +13,12 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var nameTextField: UITextView!
     @IBAction func loginButtonTapped(_ sender: Any) {
-        self.user = self.nameTextField
+        self.user = self.nameTextField.text
+        let currentStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        if let targetViewController = currentStoryboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController {
+            targetViewController.currentUser = self.user
+            navigationController?.pushViewController(targetViewController, animated: true)
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
