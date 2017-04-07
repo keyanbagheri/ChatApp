@@ -99,12 +99,19 @@ class ChatViewController: UIViewController {
     }
     
     @IBAction func sendButtonClicked(_ sender: Any) {
+        
+        var currentDate = NSDate()
+        var dateFormatter:DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd HH:mm"
+        var timeCreated = dateFormatter.string(from: currentDate as Date)
+        
+        
         if let userName = currentUser,
             let body = inputTextField.text {
             // write to firebase
             lastId = lastId + 1
             
-            let post : [String : Any] = ["userName": userName, "body": body, "timeCreated": "Just Now"]
+            let post : [String : Any] = ["userName": userName, "body": body, "timeCreated": timeCreated]
             
             ref.child("message").child("\(lastId)").updateChildValues(post)
         }
