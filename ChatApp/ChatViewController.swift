@@ -14,14 +14,12 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var chatTableView: UITableView!
     
     @IBOutlet weak var inputTextField: UITextView!
-    
-    @IBOutlet weak var sendButton: UIButton!
-    
+
     var currentUser : String? = "anonymous"
-    var lastId : Int? = 0
+    var lastId : Int = 0
     
     var ref: FIRDatabaseReference!
-    var students : [Student] = []
+    var messages : [Message] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +27,8 @@ class ChatViewController: UIViewController {
         // Do any additional setup after loading the view.
         ref = FIRDatabase.database().reference()
         
-        studentTableView.delegate = self
-        studentTableView.dataSource = self
+        chatTableView.delegate = self
+        chatTableView.dataSource = self
         
         listenToFirebase()
     }
@@ -79,55 +77,68 @@ class ChatViewController: UIViewController {
             self.chatTableView.reloadData()
             
         })
-        ref.child("message").observe(.childChanged, with: { (snapshot) in
-            print("Value : " , snapshot)
-            
-            //info > snapshot.value, studentId > snapshot.key
-            guard let info = snapshot.value as? NSDictionary,
-                let studentId = Int(snapshot.key) else {return}
-            
-            
-            //get the age and name from the info snapshot value
-            guard let age = info["age"] as? Int,
-                let name = info["name"] as? String else {return}
-            
-            //            self.students.index(where: { (student) ->Bool in
-            //                return student.id == studentID
-            //            })
-            //
-            // get the first index where studentID is matched
-            if let matchedIndex = self.students.index(where: { (studentElement) -> Bool in
-                return studentElement.id == studentId
-            }) {
-                let changedStudent = self.students[matchedIndex]
-                changedStudent.name = name
-                changedStudent.age = age
-                
-                let indexPath = IndexPath(row: matchedIndex, section: 0)
-                self.studentTableView.reloadRows(at: [indexPath], with: .fade)
-            }
-            
-        })
         
-        ref.child("message").observe(.childRemoved, with: { (snapshot) in
-            print("Value : " , snapshot)
+//        ref.child("message").observe(.childRemoved, with: { (snapshot) in
+//            print("Value : " , snapshot)
+//            
+//            guard let deletedId = Int(snapshot.key)
+//                else {return}
+//            
+//            if let deletedIndex = self.messages.index(where: { (msg) -> Bool in
+//                return msg.id == deletedId
+//            }) {
+//                self.messages.remove(at: deletedIndex)
+//                let indexPath = IndexPath(row: deletedIndex, section: 0)
+//                self.chatTableView.deleteRows(at: [indexPath], with: .right)
+//            }
+//            
+//            // to delete :
+//            //            self.ref.child("path").removeValue()
+//            //            self.ref.child("student").child("targetId").removeValue()
+//        })
+    }
+    
+    @IBAction func sendButtonClicked(_ sender: Any) {
+        if let userName = currentUser,
+            let body = inputTextField.text {
+            // write to firebase
+            lastId = lastId + 1
             
-            guard let deletedId = Int(snapshot.key)
-                else {return}
+            let post : [String : Any] = ["userName": userName, "body": body, "timeCreated": "Just Now"]
             
-            if let deletedIndex = self.messages.index(where: { (msg) -> Bool in
-                return msg.id == deletedId
-            }) {
-                self.messages.remove(at: deletedIndex)
-                let indexPath = IndexPath(row: deletedIndex, section: 0)
-                self.chatTableView.deleteRows(at: [indexPath], with: .right)
-            }
-            
-            // to delete :
-            //            self.ref.child("path").removeValue()
-            //            self.ref.child("student").child("targetId").removeValue()
-        })
+            ref.child("message").child("\(lastId)").updateChildValues(post)
+        }
     }
 
 
+    func addToChat(id : Any, messageInfo : NSDictionary) {
+//        var currentTime = "Just Now"
+        
+        if let userName = messageInfo["userName"] as? String,
+            let body = messageInfo["body"] as? String,
+            let messageId = id as? String,
+            let timeCreated = messageInfo["timeCreated"] as? String,
+            let currentMessageId = Int(messageId) {
+            let newMessage = Message(anId : currentMessageId, aName : userName, aBody : body, aDate : timeCreated)
+            self.messages.append(newMessage)
+        }
+        
+        
+    }
+    
+}
+
+extension ChatViewController : UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return messages.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as? ChatTableViewCell else {return UITableViewCell()}
+        let currentMessage = messages[indexPath.row]
+        cell.userNameLabel.text = "\(currentMessage.userName)"
+        cell.timeCreatedLabel.text = currentMessage.timeCreated
+        cell.bodyTextView.text = currentMessage.body
+        return cell
+    }
 }

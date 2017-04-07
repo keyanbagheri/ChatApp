@@ -13,10 +13,12 @@ class ViewController: UIViewController {
     var user : String?
 
     @IBOutlet weak var nameTextField: UITextView!
+    
     @IBAction func loginButtonTapped(_ sender: Any) {
+        
         self.user = self.nameTextField.text
-        let currentStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        if let targetViewController = currentStoryboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController {
+            
+        if let targetViewController = storyboard?.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController {
             targetViewController.currentUser = self.user
             navigationController?.pushViewController(targetViewController, animated: true)
         }
