@@ -130,6 +130,11 @@
                             <constraint firstItem="30l-Ut-j3j" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="zFE-pK-INB"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="chatTableView" destination="30l-Ut-j3j" id="euh-C7-bt6"/>
+                        <outlet property="inputTextField" destination="EBW-oh-MF9" id="SrA-y7-P8k"/>
+                        <outlet property="sendButton" destination="ZJT-2q-pGG" id="kDu-2f-1qn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
