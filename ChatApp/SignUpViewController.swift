@@ -71,6 +71,12 @@ class SignUpViewController: UIViewController {
             }
             
             print("User ID \(user.uid) with email: \(String(describing: user.email)) created")
+            self.directToMainNaviController()
+        }
+    }
+    func directToMainNaviController() {
+        if let mainNavi = storyboard?.instantiateViewController(withIdentifier: "MainNavigationController") {
+            present(mainNavi, animated: true, completion: nil)
         }
     }
 }

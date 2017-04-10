@@ -20,6 +20,9 @@ class SignInViewController: UIViewController {
         if (FIRAuth.auth()?.currentUser) != nil {
             print("Some user already logged in")
             // go to main page
+            if let mainNavi = storyboard?.instantiateViewController(withIdentifier: "MainNavigationController") {
+                present(mainNavi, animated: true, completion: nil)
+            }
         }
     }
     

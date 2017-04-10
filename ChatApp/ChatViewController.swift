@@ -15,7 +15,7 @@ class ChatViewController: UIViewController {
     
     @IBOutlet weak var inputTextField: UITextView!
     
-    var currentUser : String? = "anonymous"
+    var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
     var lastId : Int = 0
     
     var ref: FIRDatabaseReference!
@@ -26,6 +26,11 @@ class ChatViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         ref = FIRDatabase.database().reference()
+        
+        if let email = currentUser?.email {
+            self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!]
+            self.navigationItem.title = "Logged in as: \(email)"
+        }
         
         chatTableView.delegate = self
         chatTableView.dataSource = self
@@ -101,7 +106,7 @@ class ChatViewController: UIViewController {
         let timeCreated = dateFormatter.string(from: currentDate as Date)
         
         
-        if let userName = currentUser,
+        if let userName = currentUser?.email,
             let body = inputTextField.text {
             // write to firebase
             lastId = lastId + 1
