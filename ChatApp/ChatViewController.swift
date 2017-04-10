@@ -10,11 +10,11 @@ import UIKit
 import FirebaseDatabase
 
 class ChatViewController: UIViewController {
-
+    
     @IBOutlet weak var chatTableView: UITableView!
     
     @IBOutlet weak var inputTextField: UITextView!
-
+    
     var currentUser : String? = "anonymous"
     var lastId : Int = 0
     
@@ -23,7 +23,7 @@ class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         ref = FIRDatabase.database().reference()
         
@@ -32,9 +32,9 @@ class ChatViewController: UIViewController {
         
         
         listenToFirebase()
-
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -66,8 +66,8 @@ class ChatViewController: UIViewController {
             }
             
             // 5. update table view
-            self.tableViewScrollToBottom()
             self.chatTableView.reloadData()
+            self.tableViewScrollToBottom()
             
         })
         
@@ -111,11 +111,11 @@ class ChatViewController: UIViewController {
             ref.child("message").child("\(lastId)").updateChildValues(post)
             
             
-        inputTextField.text = ""
+            inputTextField.text = ""
         }
     }
-
-
+    
+    
     func addToChat(id : Any, messageInfo : NSDictionary) {
         
         if let userName = messageInfo["userName"] as? String,
@@ -125,7 +125,7 @@ class ChatViewController: UIViewController {
             let currentMessageId = Int(messageId) {
             let newMessage = Message(anId : currentMessageId, aName : userName, aBody : body, aDate : timeCreated)
             self.messages.append(newMessage)
-
+            
         }
         
         
@@ -150,7 +150,7 @@ extension ChatViewController : UITableViewDelegate, UITableViewDataSource {
         
     }
     
-
+    
     
     func tableViewScrollToBottom() {
         let numberOfRows = self.chatTableView.numberOfRows(inSection: 0)
@@ -158,21 +158,26 @@ extension ChatViewController : UITableViewDelegate, UITableViewDataSource {
         if numberOfRows > 0 {
             let indexPath = IndexPath(row: numberOfRows - 1, section: 0)
             self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-    }
+        }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
+            
+            
+            
+            let targetID = self.messages[indexPath.row].id
+            
+            //remove from database (modified)
+            self.ref.child("path").removeValue()
+            self.ref.child("message").child("\(targetID)").removeValue()
+            
             messages.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
             
-            //remove from database
-            self.ref.child("path").removeValue()
-            self.ref.child("message").child("targetId").removeValue()
-            
         }
     }
-    }
-    
-    
+}
+
+
 
