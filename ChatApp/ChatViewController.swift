@@ -8,9 +8,9 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseAuth
 
 class ChatViewController: UIViewController {
-    
     @IBOutlet weak var chatTableView: UITableView!
     
     @IBOutlet weak var inputTextField: UITextView!
@@ -177,6 +177,20 @@ extension ChatViewController : UITableViewDelegate, UITableViewDataSource {
             
         }
     }
+    @IBAction func logoutButtonTapped(_ sender: Any) {
+        let firebaseAuth = FIRAuth.auth()
+        do {
+            try firebaseAuth?.signOut()
+            
+            if let logInVC = storyboard?.instantiateViewController(withIdentifier: "AuthNavigationController") {
+                present(logInVC, animated: true, completion: nil)
+            }
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+    }
+    
+    
 }
 
 
