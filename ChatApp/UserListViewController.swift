@@ -20,12 +20,7 @@ class UserListViewController: UIViewController {
     
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
     
-    var usersList : [String] = []
-    
-    
-    
-    
-    
+    var usersList : [User] = []
     
 
     override func viewDidLoad() {
@@ -42,19 +37,78 @@ class UserListViewController: UIViewController {
         usersTableView.dataSource = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    /*
+    func listenToFirebase() {
+        ref.child("message").observe(.value, with: { (snapshot) in
+            print("Value : " , snapshot)
+        })
+        
+        // 2. get the snapshot
+        ref.child("message").observe(.childAdded, with: { (snapshot) in
+            print("Value : " , snapshot)
+            
+            // 3. convert snapshot to dictionary
+            guard let info = snapshot.value as? NSDictionary else {return}
+            // 4. add student to array of messages
+            self.addToChat(id: snapshot.key, messageInfo: info)
+            
+            // sort
+            self.messages.sort(by: { (message1, message2) -> Bool in
+                return message1.id < message2.id
+            })
+            
+            // set last message id to last id
+            if let lastMessage = self.messages.last {
+                self.lastId = lastMessage.id
+            }
+            
+            // 5. update table view
+            self.chatTableView.reloadData()
+            self.tableViewScrollToBottom()
+            
+        })
+        
+        ref.child("message").observe(.childRemoved, with: { (snapshot) in
+            print("Value : " , snapshot)
+            
+            guard let deletedId = Int(snapshot.key)
+                else {return}
+            
+            if let deletedIndex = self.messages.index(where: { (msg) -> Bool in
+                return msg.id == deletedId
+            }) {
+                self.messages.remove(at: deletedIndex)
+                let indexPath = IndexPath(row: deletedIndex, section: 0)
+                self.chatTableView.deleteRows(at: [indexPath], with: .right)
+            }
+            
+            // to delete :
+            //            self.ref.child("path").removeValue()
+            //            self.ref.child("student").child("targetId").removeValue()
+        })
+        
+        
     }
+*/
     
 
-    @IBAction func logoutButton(_ sender: Any) {
-        
-        
-        
+    @IBAction func logoutButtonTapped(_ sender: Any) {
+        let firebaseAuth = FIRAuth.auth()
+        do {
+            try firebaseAuth?.signOut()
+            
+            if let logInVC = storyboard?.instantiateViewController(withIdentifier: "AuthNavigationController") {
+                present(logInVC, animated: true, completion: nil)
+            }
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
     }
 
 }
+
+//TABLEVIEW DELEGATE AND DATASOURCE
 
 extension UserListViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -97,18 +151,8 @@ extension UserListViewController : UITableViewDelegate, UITableViewDataSource {
             
         }
     }
-    @IBAction func logoutButtonTapped(_ sender: Any) {
-        let firebaseAuth = FIRAuth.auth()
-        do {
-            try firebaseAuth?.signOut()
-            
-            if let logInVC = storyboard?.instantiateViewController(withIdentifier: "AuthNavigationController") {
-                present(logInVC, animated: true, completion: nil)
-            }
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
-    }
+    
+    
     
     
 }

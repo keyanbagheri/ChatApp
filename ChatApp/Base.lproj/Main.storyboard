@@ -183,7 +183,7 @@
                     <navigationItem key="navigationItem" id="SHT-nP-7Uu">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="lRa-jZ-IJd">
                             <connections>
-                                <action selector="logoutButton:" destination="ViD-ce-if9" id="myN-A6-rhB"/>
+                                <action selector="logoutButtonTapped:" destination="ViD-ce-if9" id="uZ6-qD-F0U"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
