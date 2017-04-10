@@ -9,19 +9,16 @@
 import Foundation
 
 class User {
-    var id: Int
+    var id: String
     var email : String
-    var password : String
     
     init( ) {
-        id = 0
+        id = ""
         email = ""
-        password = ""
     }
     
-    init(anId : Int, anEmail : String, aPassword : String) {
+    init(anId : String, anEmail : String) {
         id = anId
         email = anEmail
-        password = aPassword
     }
 }
