@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 import FirebaseAuth
 
 class SignUpViewController: UIViewController {
@@ -14,13 +15,12 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
+    var ref: FIRDatabaseReference!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        //        FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
-        // ...
-        //        }
+        ref = FIRDatabase.database().reference()
     }
     
     override func didReceiveMemoryWarning() {
@@ -71,6 +71,10 @@ class SignUpViewController: UIViewController {
             }
             
             print("User ID \(user.uid) with email: \(String(describing: user.email)) created")
+            
+            let post : [String : String] = ["email": user.email!]
+            self.ref.child("users").child("\(user.uid)").updateChildValues(post)
+            
             self.directToMainNaviController()
         }
     }
