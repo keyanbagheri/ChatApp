@@ -16,6 +16,7 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var inputTextField: UITextView!
     
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
+//    var currentChat : Chat
     var lastId : Int = 0
     
     var ref: FIRDatabaseReference!
@@ -111,7 +112,7 @@ class ChatViewController: UIViewController {
             // write to firebase
             lastId = lastId + 1
             
-            let post : [String : Any] = ["userName": userName, "body": body, "timeCreated": timeCreated]
+            let post : [String : Any] = ["user": currentUser!.uid, "body": body, "timeCreated": timeCreated]
             
             ref.child("message").child("\(lastId)").updateChildValues(post)
             
@@ -148,7 +149,7 @@ extension ChatViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as? ChatTableViewCell else {return UITableViewCell()}
         let currentMessage = messages[indexPath.row]
-        cell.userNameLabel.text = "\(currentMessage.userName)"
+        cell.userNameLabel.text = "\(chat.users[currentMessage.user])"
         cell.timeCreatedLabel.text = currentMessage.timeCreated
         cell.bodyTextView.text = currentMessage.body
         return cell

@@ -1,5 +1,5 @@
 //
-//  Student.swift
+//  Message.swift
 //  SimpleFirebase
 //
 //  Created by bitbender on 4/6/17.
