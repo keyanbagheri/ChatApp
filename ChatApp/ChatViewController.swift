@@ -149,7 +149,7 @@ extension ChatViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as? ChatTableViewCell else {return UITableViewCell()}
         let currentMessage = messages[indexPath.row]
-        cell.userNameLabel.text = "\(chat.users[currentMessage.user])"
+//        cell.userNameLabel.text = "\(chat.users[currentMessage.user])"
         cell.timeCreatedLabel.text = currentMessage.timeCreated
         cell.bodyTextView.text = currentMessage.body
         return cell
