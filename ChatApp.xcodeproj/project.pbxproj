@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		679688E21E9B88C0006675E5 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679688E11E9B88C0006675E5 /* Chat.swift */; };
 		679688E41E9B8A7F006675E5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679688E31E9B8A7F006675E5 /* User.swift */; };
+		1A573F731E9B8603000F387B /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A573F721E9B8603000F387B /* UserListViewController.swift */; };
 		67E87D761E9B645D00772804 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E87D751E9B645D00772804 /* SignUpViewController.swift */; };
 		67E87D7A1E9B648600772804 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E87D791E9B648600772804 /* SignInViewController.swift */; };
 		67FB98F51E977C120078BC0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FB98F41E977C120078BC0F /* AppDelegate.swift */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		679688E11E9B88C0006675E5 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		679688E31E9B8A7F006675E5 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		1A573F721E9B8603000F387B /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		67E87D751E9B645D00772804 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		67E87D791E9B648600772804 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		67FB98F11E977C120078BC0F /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +98,7 @@
 				67FB990E1E97929D0078BC0F /* ChatTableViewCell.swift */,
 				67FB990C1E978D800078BC0F /* Message.swift */,
 				67FB98F81E977C120078BC0F /* Main.storyboard */,
+				1A573F721E9B8603000F387B /* UserListViewController.swift */,
 				67FB98FB1E977C120078BC0F /* Assets.xcassets */,
 				67FB98FD1E977C120078BC0F /* LaunchScreen.storyboard */,
 				67FB99001E977C120078BC0F /* Info.plist */,
@@ -237,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				67E87D7A1E9B648600772804 /* SignInViewController.swift in Sources */,
+				1A573F731E9B8603000F387B /* UserListViewController.swift in Sources */,
 				67FB98F71E977C120078BC0F /* ViewController.swift in Sources */,
 				67E87D761E9B645D00772804 /* SignUpViewController.swift in Sources */,
 				67FB990D1E978D800078BC0F /* Message.swift in Sources */,
