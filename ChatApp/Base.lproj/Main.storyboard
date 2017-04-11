@@ -65,7 +65,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="89a-X1-8T3" id="CUl-cr-RqT">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="81.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="81"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UM6-gm-pn5">
@@ -130,13 +130,11 @@
                             <constraint firstItem="30l-Ut-j3j" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="83" id="zFE-pK-INB"/>
                         </constraints>
                     </view>
-                    <toolbarItems>
-                        <barButtonItem title="Logout" id="L6s-ue-1eg"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Email" id="nhe-aN-SBP">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Vdy-iR-pod">
+                        <barButtonItem key="leftBarButtonItem" title="&lt;" id="Vdy-iR-pod">
                             <connections>
-                                <action selector="logoutButtonTapped:" destination="BYZ-38-t0r" id="ase-dD-Cok"/>
+                                <action selector="backButtonTapped:" destination="BYZ-38-t0r" id="jaO-jm-wyW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -171,7 +169,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="par-7e-cjN" id="dS3-og-7df">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4k-Nn-z6C">

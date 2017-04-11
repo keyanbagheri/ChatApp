@@ -185,16 +185,9 @@ extension ChatViewController : UITableViewDelegate, UITableViewDataSource {
             
         }
     }
-    @IBAction func logoutButtonTapped(_ sender: Any) {
-        let firebaseAuth = FIRAuth.auth()
-        do {
-            try firebaseAuth?.signOut()
-            
-            if let logInVC = storyboard?.instantiateViewController(withIdentifier: "AuthNavigationController") {
-                present(logInVC, animated: true, completion: nil)
-            }
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
+    @IBAction func backButtonTapped(_ sender: Any) {
+        if let mainNavi = storyboard?.instantiateViewController(withIdentifier: "MainNavigationController") {
+            present(mainNavi, animated: true, completion: nil)
         }
     }
     
