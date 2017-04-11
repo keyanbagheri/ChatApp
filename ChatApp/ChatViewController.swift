@@ -16,7 +16,8 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var inputTextField: UITextView!
     
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
-//    var currentChat : Chat
+    var recipientUser : User?
+    var currentChat : Chat?
     var lastId : Int = 0
     
     var ref: FIRDatabaseReference!
