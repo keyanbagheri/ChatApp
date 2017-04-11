@@ -10,7 +10,15 @@ import UIKit
 
 class ImageTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var chatImageView: UIImageView!
+    @IBOutlet weak var chatImageView: UIImageView! {
+        didSet{
+            
+//            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chatImageView.imageTapped))
+//            chatImageView.isUserInteractionEnabled = true
+//            chatImageView.addGestureRecognizer(tapGestureRecognizer)
+            
+        }
+    }
     
     @IBOutlet weak var nameLabel: UILabel!
     
@@ -20,6 +28,7 @@ class ImageTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -62,5 +71,15 @@ extension UIImageView {
             })
         }).resume()
     }
+    
+//    func imageTapped() {
+//        let bigImageView = UIImageView(image: self.image)
+//        bigImageView.contentMode = UIViewContentMode.scaleAspectFit
+//        bigImageView.frame = (self.inputView?.frame)!
+//        self.inputViewController?.view.addSubview(bigImageView)
+//        
+//        
+//    }
+    
     
 }

@@ -234,6 +234,7 @@ extension ChatViewController : UITableViewDelegate, UITableViewDataSource {
             cell.timeSentLabel.text = currentMessage.timestamp
             
             
+            
             return cell
             
         } else {
