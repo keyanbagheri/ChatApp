@@ -205,7 +205,15 @@ extension UserListViewController : UITableViewDelegate, UITableViewDataSource {
         
         let selectedPerson = usersList[indexPath.row]
         
-        let newChat = Chat(anId: "\(currentUserID)-\(selectedPerson.id)", userOneId: currentUserID , userTwoId: selectedPerson.id)
+        var userIDs = [currentUserID, selectedPerson.id]
+        
+        userIDs.sort(by: { (user1, user2) -> Bool in
+            return user1 < user2
+        })
+        
+        let chatID = "\(userIDs[0])-\(userIDs[1])"
+        
+        let newChat = Chat(anId: chatID, userOneId: currentUserID , userTwoId: selectedPerson.id)
         
         ref.child("chat").child(newChat.id).observe(.value, with: { (snapshot) in
             
