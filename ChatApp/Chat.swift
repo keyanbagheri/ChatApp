@@ -9,17 +9,17 @@
 import Foundation
 
 class Chat {
-    var id: Int
+    var id: String
     var users : Array<User>
     var messages : Array<Message>
     
     init( ) {
-        id = 0
+        id = ""
         users = [User]()
         messages = [Message]()
     }
     
-    init(anId : Int, userOne: User, userTwo: User) {
+    init(anId : String, userOne: User, userTwo: User) {
         id = anId
         users = [userOne, userTwo]
         messages = [Message]()

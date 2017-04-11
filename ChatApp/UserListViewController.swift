@@ -20,7 +20,11 @@ class UserListViewController: UIViewController {
     
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
     
+    var currentUserObject : [User] = []
+    
     var usersList : [User] = []
+    
+    var personalisedUserList : [User] = []
     
 
     override func viewDidLoad() {
@@ -37,8 +41,52 @@ class UserListViewController: UIViewController {
         usersTableView.dataSource = self
         
         listenToFirebase()
+        //createPersonalisedUserList()
+        filterForCurrentUserObject()
+        
+        
+        
+        
         
         print("UID -> \(FIRAuth.auth()?.currentUser?.uid)")
+        
+    }
+    
+//    func createPersonalisedUserList() {
+//        self.personalisedUserList = usersList.filter {
+//            
+//            return $0.email.range(of: "\(FIRAuth.auth()?.currentUser?.email)") == nil
+//        }
+//        usersTableView.reloadData()
+//    }
+    
+    func createPersonalisedUserList() {
+        if usersList.count > 0 {
+            
+        for user in usersList {
+            if user.id != "\(FIRAuth.auth()?.currentUser?.uid)" {
+                personalisedUserList.append(user)
+            }
+        }
+            
+        } else {
+            return
+        }
+    }
+    
+    func filterForCurrentUserObject() {
+        var filteredUserArray : [User] = []
+        
+        for user in usersList {
+            if user.email == "\(FIRAuth.auth()?.currentUser?.uid)" {
+                filteredUserArray.append(user)
+            }
+        }
+        self.currentUserObject = filteredUserArray
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //createPersonalisedUserList()
         
     }
 
@@ -47,6 +95,8 @@ class UserListViewController: UIViewController {
     func listenToFirebase() {
         ref.child("users").observe(.value, with: { (snapshot) in
             print("Value : " , snapshot)
+            
+            //self.createPersonalisedUserList()
         })
         
         // 2. get the snapshot
@@ -56,7 +106,7 @@ class UserListViewController: UIViewController {
             // 3. convert snapshot to dictionary
             guard let info = snapshot.value as? NSDictionary else {return}
             // 4. add student to array of messages
-            self.addToList(id: snapshot.key, userInfo: info)
+            self.addToUserList(id: snapshot.key, userInfo: info)
             
             // sort
             self.usersList.sort(by: { (user1, user2) -> Bool in
@@ -89,10 +139,12 @@ class UserListViewController: UIViewController {
             //            self.ref.child("student").child("targetId").removeValue()
         })
         
-        
+    
+    //createPersonalisedUserList()
+    
     }
     
-    func addToList(id : Any, userInfo : NSDictionary) {
+    func addToUserList(id : Any, userInfo : NSDictionary) {
         
         if let email = userInfo["email"] as? String,
             let userID = id as? String {
@@ -103,32 +155,6 @@ class UserListViewController: UIViewController {
         
         
     }
-    
-//    func addToChat(id : Any, messageInfo : NSDictionary) {
-//        
-//        if let userName = messageInfo["userName"] as? String,
-//            let body = messageInfo["body"] as? String,
-//            let messageId = id as? String,
-//            let timeCreated = messageInfo["timeCreated"] as? String,
-//            let currentMessageId = Int(messageId) {
-//            let newMessage = Message(anId : currentMessageId, aName : userName, aBody : body, aDate : timeCreated)
-//            self.messages.append(newMessage)
-//            
-//        }
-//        
-//        
-//    }
-    
-//    func addToList(userInfo : NSDictionary) {
-//        
-//        if let email = userInfo["email"] as? String {
-//            let newUser = User(anEmail : email)
-//            self.usersList.append(newUser)
-//            
-//        }
-//        
-//        
-//    }
     
     
 
@@ -172,7 +198,7 @@ extension UserListViewController : UITableViewDelegate, UITableViewDataSource {
         
         let selectedPerson = usersList[indexPath.row]
         
-        let newChat = Chat(anId: <#T##Int#>, userOne: <#T##User#>, userTwo: <#T##User#>)
+        let newChat = Chat(anId: "\(FIRAuth.auth()?.currentUser?.uid)-\(selectedPerson.id)", userOne: currentUserObject[0] , userTwo: selectedPerson)
         
         
         controller.recipientUser = selectedPerson
