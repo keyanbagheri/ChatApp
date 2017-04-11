@@ -11,7 +11,6 @@ import Foundation
 class User {
     var id: Int
     var email : String
-    var password : String
     
     init( ) {
         id = 0
@@ -19,7 +18,7 @@ class User {
         password = ""
     }
     
-    init(anId : Int, anEmail : String, aPassword : String) {
+    init(anId : Int, anEmail : String) {
         id = anId
         email = anEmail
         password = aPassword
