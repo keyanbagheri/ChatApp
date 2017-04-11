@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseAuth
+import FirebaseStorage
 
 class ChatViewController: UIViewController {
     @IBOutlet weak var chatTableView: UITableView!
@@ -137,6 +138,73 @@ class ChatViewController: UIViewController {
         }
         
         
+    }
+    
+    @IBAction func uploadImageButton(_ sender: Any) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
+        
+    }
+    
+    func dismissImagePicker() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+func uploadImage(_ image: UIImage) {
+    
+    
+    let ref = FIRStorage.storage().reference()
+    guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {return}
+    let metaData = FIRStorageMetadata()
+    metaData.contentType = "image/jpeg"
+    ref.child("studentImage.jpeg").put(imageData, metadata: metaData) { (meta, error) in
+        
+        if let downloadPath = meta?.downloadURL()?.absoluteString {
+            //save to firebase database
+            saveImagePath(downloadPath)
+        }
+        
+    }
+}
+
+let dateFormat : DateFormatter = {
+    let _dateFormatter = DateFormatter()
+    let locale = Locale(identifier: "en_US_POSIX")
+    _dateFormatter.locale = locale
+    _dateFormatter.dateFormat = "'yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
+    return _dateFormatter
+}()
+
+func saveImagePath(_ path: String) {
+    let dbRef = FIRDatabase.database().reference()
+    let chatValue : [String: Any] = ["name":"\(FIRAuth.auth()?.currentUser?.uid)", "timestamp": dateFormat.string(from: Date()), "image": path]
+    
+    dbRef.child("chat").childByAutoId().setValue(chatValue)
+}
+
+extension ChatViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        defer {
+            dismissImagePicker()
+        }
+        
+        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+            return
+        }
+        
+        //display / store
+        uploadImage(image)
+        
+    }
+    
+    func uniqueFileForUser(_ name: String) -> String {
+        let currentDate = Date()
+        return "\(name)_\(currentDate.timeIntervalSince1970).jpeg"
     }
     
     
