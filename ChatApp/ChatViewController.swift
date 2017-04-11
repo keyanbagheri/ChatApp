@@ -153,12 +153,11 @@ class ChatViewController: UIViewController {
     
     func uploadImage(_ image: UIImage) {
         
-        
         let ref = FIRStorage.storage().reference()
         guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {return}
         let metaData = FIRStorageMetadata()
         metaData.contentType = "image/jpeg"
-        ref.child("studentImage.jpeg").put(imageData, metadata: metaData) { (meta, error) in
+        ref.child("\(currentUser?.email)-\(createTimeStamp()).jpeg").put(imageData, metadata: metaData) { (meta, error) in
             
             if let downloadPath = meta?.downloadURL()?.absoluteString {
                 //save to firebase database
@@ -170,23 +169,21 @@ class ChatViewController: UIViewController {
         
     }
     
-    
-//    let dateFormat : DateFormatter = {
-//        let _dateFormatter = DateFormatter()
-//        let locale = Locale(identifier: "en_US_POSIX")
-//        _dateFormatter.locale = locale
-//        _dateFormatter.dateFormat = "'yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
-//        return _dateFormatter
-//    }()
-    
-    func saveImagePath(_ path: String) {
-        lastId = lastId + 1
+    func createTimeStamp() -> String {
+        
         let currentDate = NSDate()
         let dateFormatter:DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM-dd HH:mm"
         let timeCreated = dateFormatter.string(from: currentDate as Date)
         
-        let chatValue : [String: Any] = ["userID": currentUser!.uid, "userEmail": currentUser!.email, "body":"\(currentUser!.uid)-\(timeCreated)", "timestamp": timeCreated, "image": path]
+        return timeCreated
+        
+    }
+    
+    func saveImagePath(_ path: String) {
+        lastId = lastId + 1
+        
+        let chatValue : [String: Any] = ["userID": currentUser!.uid, "userEmail": currentUser!.email, "body":"\(currentUser!.uid)-\(createTimeStamp())", "timestamp": createTimeStamp(), "image": path]
         
         ref.child("chat").child(currentChat.id).child("messages").child("\(lastId)").updateChildValues(chatValue)
     }
@@ -225,14 +222,34 @@ extension ChatViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as? ChatTableViewCell else {return UITableViewCell()}
-        let currentMessage = messages[indexPath.row]
-        cell.userNameLabel.text = currentMessage.userEmail
-        cell.timeCreatedLabel.text = currentMessage.timestamp
-        cell.bodyTextView.text = currentMessage.body
-        return cell
         
+        let currentMessage = messages[indexPath.row]
+        
+        if currentMessage.imageURL != "nil" {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ImageTableViewCell") as? ImageTableViewCell else {return UITableViewCell()}
+            
+            let messageURL = currentMessage.imageURL
+            cell.chatImageView.loadImageUsingCacheWithUrlString(urlString: messageURL)
+            cell.nameLabel.text = currentMessage.userEmail
+            cell.timeSentLabel.text = currentMessage.timestamp
+            
+            
+            return cell
+            
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as? ChatTableViewCell else {return UITableViewCell()}
+            
+            
+            cell.userNameLabel.text = currentMessage.userEmail
+            cell.timeCreatedLabel.text = currentMessage.timestamp
+            cell.bodyTextView.text = currentMessage.body
+            
+            return cell
+            
+        }
     }
+    
+
     
     
     

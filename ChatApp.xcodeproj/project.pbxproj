@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A3635D11E9D20B3003189AB /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3635D01E9D20B3003189AB /* ImageTableViewCell.swift */; };
 		1A4E27FB1E9BC504006DF5B5 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4E27FA1E9BC504006DF5B5 /* UserTableViewCell.swift */; };
 		1A573F731E9B8603000F387B /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A573F721E9B8603000F387B /* UserListViewController.swift */; };
 		679688E21E9B88C0006675E5 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679688E11E9B88C0006675E5 /* Chat.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A3635D01E9D20B3003189AB /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		1A4E27FA1E9BC504006DF5B5 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		1A573F721E9B8603000F387B /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		679688E11E9B88C0006675E5 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				67FB990E1E97929D0078BC0F /* ChatTableViewCell.swift */,
 				67FB990C1E978D800078BC0F /* Message.swift */,
 				67FB98F81E977C120078BC0F /* Main.storyboard */,
+				1A3635D01E9D20B3003189AB /* ImageTableViewCell.swift */,
 				67E87D791E9B648600772804 /* SignInViewController.swift */,
 				67E87D751E9B645D00772804 /* SignUpViewController.swift */,
 				1A573F721E9B8603000F387B /* UserListViewController.swift */,
@@ -251,6 +254,7 @@
 				67FB990F1E97929D0078BC0F /* ChatTableViewCell.swift in Sources */,
 				679688E41E9B8A7F006675E5 /* User.swift in Sources */,
 				679688E21E9B88C0006675E5 /* Chat.swift in Sources */,
+				1A3635D11E9D20B3003189AB /* ImageTableViewCell.swift in Sources */,
 				67FB99071E97843D0078BC0F /* ChatViewController.swift in Sources */,
 				67FB98F51E977C120078BC0F /* AppDelegate.swift in Sources */,
 			);
