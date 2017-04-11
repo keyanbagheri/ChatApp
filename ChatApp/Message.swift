@@ -13,21 +13,24 @@ class Message {
     var userID : String
     var userEmail : String
     var body : String
-    var timeCreated : String
+    var imageURL : String
+    var timestamp : String
     
     init( ) {
         id = 0
         userID = ""
         userEmail = ""
         body = ""
-        timeCreated = ""
+        imageURL = ""
+        timestamp = ""
     }
     
-    init(anId : Int, aUserID : String, aUserEmail : String, aBody : String, aDate : String) {
+    init(anId : Int, aUserID : String, aUserEmail : String, aBody : String, anImageURL : String, aDate : String) {
         id = anId
         userID = aUserID
         userEmail = aUserEmail
         body = aBody
-        timeCreated = aDate
+        imageURL = anImageURL
+        timestamp = aDate
     }
 }

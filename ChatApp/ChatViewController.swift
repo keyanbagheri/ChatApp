@@ -113,8 +113,7 @@ class ChatViewController: UIViewController {
             let body = inputTextField.text {
             // write to firebase
             lastId = lastId + 1
-            
-            let post : [String : Any] = ["userID": currentUser!.uid, "userEmail": currentUser!.email, "body": body, "timeCreated": timeCreated]
+            let post : [String : Any] = ["userID": currentUser!.uid, "userEmail": currentUser!.email, "body": body, "image" : "nil", "timestamp": timeCreated]
             
             ref.child("chat").child(currentChat.id).child("messages").child("\(lastId)").updateChildValues(post)
             
@@ -129,10 +128,11 @@ class ChatViewController: UIViewController {
         if let userID = messageInfo["userID"] as? String,
             let userEmail = messageInfo["userEmail"] as? String,
             let body = messageInfo["body"] as? String,
+            let imageURL = messageInfo["image"] as? String,
             let messageId = id as? String,
-            let timeCreated = messageInfo["timeCreated"] as? String,
+            let timeCreated = messageInfo["timestamp"] as? String,
             let currentMessageId = Int(messageId) {
-            let newMessage = Message(anId : currentMessageId, aUserID : userID, aUserEmail : userEmail, aBody : body, aDate : timeCreated)
+            let newMessage = Message(anId : currentMessageId, aUserID : userID, aUserEmail : userEmail, aBody : body, anImageURL: imageURL, aDate : timeCreated)
             self.messages.append(newMessage)
             
         }
@@ -151,39 +151,47 @@ class ChatViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-}
-
-func uploadImage(_ image: UIImage) {
-    
-    
-    let ref = FIRStorage.storage().reference()
-    guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {return}
-    let metaData = FIRStorageMetadata()
-    metaData.contentType = "image/jpeg"
-    ref.child("studentImage.jpeg").put(imageData, metadata: metaData) { (meta, error) in
+    func uploadImage(_ image: UIImage) {
         
-        if let downloadPath = meta?.downloadURL()?.absoluteString {
-            //save to firebase database
-            saveImagePath(downloadPath)
+        
+        let ref = FIRStorage.storage().reference()
+        guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {return}
+        let metaData = FIRStorageMetadata()
+        metaData.contentType = "image/jpeg"
+        ref.child("studentImage.jpeg").put(imageData, metadata: metaData) { (meta, error) in
+            
+            if let downloadPath = meta?.downloadURL()?.absoluteString {
+                //save to firebase database
+                self.saveImagePath(downloadPath)
+            }
+            
         }
         
+        
+    }
+    
+    
+//    let dateFormat : DateFormatter = {
+//        let _dateFormatter = DateFormatter()
+//        let locale = Locale(identifier: "en_US_POSIX")
+//        _dateFormatter.locale = locale
+//        _dateFormatter.dateFormat = "'yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
+//        return _dateFormatter
+//    }()
+    
+    func saveImagePath(_ path: String) {
+        lastId = lastId + 1
+        let currentDate = NSDate()
+        let dateFormatter:DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd HH:mm"
+        let timeCreated = dateFormatter.string(from: currentDate as Date)
+        
+        let chatValue : [String: Any] = ["userID": currentUser!.uid, "userEmail": currentUser!.email, "body":"\(currentUser!.uid)-\(timeCreated)", "timestamp": timeCreated, "image": path]
+        
+        ref.child("chat").child(currentChat.id).child("messages").child("\(lastId)").updateChildValues(chatValue)
     }
 }
 
-let dateFormat : DateFormatter = {
-    let _dateFormatter = DateFormatter()
-    let locale = Locale(identifier: "en_US_POSIX")
-    _dateFormatter.locale = locale
-    _dateFormatter.dateFormat = "'yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
-    return _dateFormatter
-}()
-
-func saveImagePath(_ path: String) {
-    let dbRef = FIRDatabase.database().reference()
-    let chatValue : [String: Any] = ["name":"\(FIRAuth.auth()?.currentUser?.uid)", "timestamp": dateFormat.string(from: Date()), "image": path]
-    
-    dbRef.child("chat").childByAutoId().setValue(chatValue)
-}
 
 extension ChatViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -220,7 +228,7 @@ extension ChatViewController : UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as? ChatTableViewCell else {return UITableViewCell()}
         let currentMessage = messages[indexPath.row]
         cell.userNameLabel.text = currentMessage.userEmail
-        cell.timeCreatedLabel.text = currentMessage.timeCreated
+        cell.timeCreatedLabel.text = currentMessage.timestamp
         cell.bodyTextView.text = currentMessage.body
         return cell
         

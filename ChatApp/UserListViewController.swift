@@ -223,7 +223,7 @@ extension UserListViewController : UITableViewDelegate, UITableViewDataSource {
                 dateFormatter.dateFormat = "MM-dd HH:mm"
                 let timeCreated = dateFormatter.string(from: currentDate as Date)
                 
-                let post : [String : Any] = ["messages": ["0": ["body": "This is the beginning of the chat between \(selectedPerson.email) and \(self.currentUserEmail)", "timeCreated": timeCreated, "userID": self.currentUserID, "userEmail": self.currentUserEmail]], "users": [self.currentUserID: self.currentUserEmail, selectedPerson.id: selectedPerson.email]]
+                let post : [String : Any] = ["messages": ["0": ["body": "This is the beginning of the chat between \(selectedPerson.email) and \(self.currentUserEmail)", "image" : "nil", "timestamp": timeCreated, "userID": self.currentUserID, "userEmail": self.currentUserEmail]], "users": [self.currentUserID: self.currentUserEmail, selectedPerson.id: selectedPerson.email]]
                 self.ref.child("chat").child(newChat.id).updateChildValues(post)
             }
             //self.createPersonalisedUserList()
