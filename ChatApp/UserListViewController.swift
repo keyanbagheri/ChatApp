@@ -20,7 +20,8 @@ class UserListViewController: UIViewController {
     
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
     
-    var currentUserObject : [User] = []
+    var currentUserID : String = ""
+    var currentUserEmail: String = ""
     
     var usersList : [User] = []
     
@@ -33,8 +34,14 @@ class UserListViewController: UIViewController {
         ref = FIRDatabase.database().reference()
 
         if let email = currentUser?.email {
+            currentUserEmail = email
             self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!]
             self.navigationItem.title = "Logged in as: \(email)"
+        }
+        
+        if let id = currentUser?.uid {
+            print(id)
+            currentUserID = id
         }
         
         usersTableView.delegate = self
@@ -48,7 +55,7 @@ class UserListViewController: UIViewController {
         
         
         
-        print("UID -> \(FIRAuth.auth()?.currentUser?.uid)")
+//        print("UID -> \(FIRAuth.auth()?.currentUser?.uid)")
         
     }
     
@@ -82,7 +89,7 @@ class UserListViewController: UIViewController {
                 filteredUserArray.append(user)
             }
         }
-        self.currentUserObject = filteredUserArray
+//        self.currentUser = filteredUserArray
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -198,11 +205,25 @@ extension UserListViewController : UITableViewDelegate, UITableViewDataSource {
         
         let selectedPerson = usersList[indexPath.row]
         
-        let newChat = Chat(anId: "\(FIRAuth.auth()?.currentUser?.uid)-\(selectedPerson.id)", userOne: currentUserObject[0] , userTwo: selectedPerson)
+        let newChat = Chat(anId: "\(currentUserID)-\(selectedPerson.id)", userOneId: currentUserID , userTwoId: selectedPerson.id)
+        
+        ref.child("chat").child(newChat.id).observe(.value, with: { (snapshot) in
+            
+            if !snapshot.hasChildren() {
+                let currentDate = NSDate()
+                let dateFormatter:DateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM-dd HH:mm"
+                let timeCreated = dateFormatter.string(from: currentDate as Date)
+                
+                let post : [String : Any] = ["messages": ["0": ["body": "This is the beginning of the chat between \(selectedPerson.email) and \(self.currentUserEmail)", "timeCreated": timeCreated, "userID": self.currentUserID, "userEmail": self.currentUserEmail]], "users": [self.currentUserID: self.currentUserEmail, selectedPerson.id: selectedPerson.email]]
+                self.ref.child("chat").child(newChat.id).updateChildValues(post)
+            }
+            //self.createPersonalisedUserList()
+        })
         
         
         controller.recipientUser = selectedPerson
-        //controller.currentChat?.users = [currentUser, selectedPerson]
+        controller.currentChat = newChat
         
         navigationController?.pushViewController(controller, animated: true)
     }

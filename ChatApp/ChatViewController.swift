@@ -17,7 +17,7 @@ class ChatViewController: UIViewController {
     
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
     var recipientUser : User?
-    var currentChat : Chat?
+    var currentChat : Chat = Chat()
     var lastId : Int = 0
     
     var ref: FIRDatabaseReference!
@@ -49,12 +49,12 @@ class ChatViewController: UIViewController {
     
     
     func listenToFirebase() {
-        ref.child("message").observe(.value, with: { (snapshot) in
+        ref.child("chat").child(currentChat.id).child("messages").observe(.value, with: { (snapshot) in
             print("Value : " , snapshot)
         })
         
         // 2. get the snapshot
-        ref.child("message").observe(.childAdded, with: { (snapshot) in
+        ref.child("chat").child(currentChat.id).child("messages").observe(.childAdded, with: { (snapshot) in
             print("Value : " , snapshot)
             
             // 3. convert snapshot to dictionary
@@ -78,7 +78,7 @@ class ChatViewController: UIViewController {
             
         })
         
-        ref.child("message").observe(.childRemoved, with: { (snapshot) in
+        ref.child("chat").child(currentChat.id).child("messages").observe(.childRemoved, with: { (snapshot) in
             print("Value : " , snapshot)
             
             guard let deletedId = Int(snapshot.key)
@@ -113,9 +113,9 @@ class ChatViewController: UIViewController {
             // write to firebase
             lastId = lastId + 1
             
-            let post : [String : Any] = ["user": currentUser!.uid, "body": body, "timeCreated": timeCreated]
+            let post : [String : Any] = ["userID": currentUser!.uid, "userEmail": currentUser!.email, "body": body, "timeCreated": timeCreated]
             
-            ref.child("message").child("\(lastId)").updateChildValues(post)
+            ref.child("chat").child(currentChat.id).child("messages").child("\(lastId)").updateChildValues(post)
             
             
             inputTextField.text = ""
@@ -125,12 +125,13 @@ class ChatViewController: UIViewController {
     
     func addToChat(id : Any, messageInfo : NSDictionary) {
         
-        if let userName = messageInfo["userName"] as? String,
+        if let userID = messageInfo["userID"] as? String,
+            let userEmail = messageInfo["userEmail"] as? String,
             let body = messageInfo["body"] as? String,
             let messageId = id as? String,
             let timeCreated = messageInfo["timeCreated"] as? String,
             let currentMessageId = Int(messageId) {
-            let newMessage = Message(anId : currentMessageId, aName : userName, aBody : body, aDate : timeCreated)
+            let newMessage = Message(anId : currentMessageId, aUserID : userID, aUserEmail : userEmail, aBody : body, aDate : timeCreated)
             self.messages.append(newMessage)
             
         }
@@ -150,7 +151,7 @@ extension ChatViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as? ChatTableViewCell else {return UITableViewCell()}
         let currentMessage = messages[indexPath.row]
-//        cell.userNameLabel.text = "\(chat.users[currentMessage.user])"
+        cell.userNameLabel.text = currentMessage.userEmail
         cell.timeCreatedLabel.text = currentMessage.timeCreated
         cell.bodyTextView.text = currentMessage.body
         return cell
@@ -177,7 +178,7 @@ extension ChatViewController : UITableViewDelegate, UITableViewDataSource {
             
             //remove from database (modified)
             self.ref.child("path").removeValue()
-            self.ref.child("message").child("\(targetID)").removeValue()
+            self.ref.child("chat").child(currentChat.id).child("messages").child("\(targetID)").removeValue()
             
             messages.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)

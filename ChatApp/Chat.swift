@@ -10,18 +10,18 @@ import Foundation
 
 class Chat {
     var id: String
-    var users : Array<User>
+    var userIds : Array<String>
     var messages : Array<Message>
     
     init( ) {
         id = ""
-        users = [User]()
+        userIds = [String]()
         messages = [Message]()
     }
     
-    init(anId : String, userOne: User, userTwo: User) {
+    init(anId : String, userOneId: String, userTwoId: String) {
         id = anId
-        users = [userOne, userTwo]
+        userIds = [userOneId, userTwoId]
         messages = [Message]()
     }
 }

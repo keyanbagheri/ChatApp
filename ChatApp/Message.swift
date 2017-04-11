@@ -10,20 +10,23 @@ import Foundation
 
 class Message {
     var id: Int
-    var userName : String
+    var userID : String
+    var userEmail : String
     var body : String
     var timeCreated : String
     
     init( ) {
         id = 0
-        userName = ""
+        userID = ""
+        userEmail = ""
         body = ""
         timeCreated = ""
     }
     
-    init(anId : Int, aName : String, aBody : String, aDate : String) {
+    init(anId : Int, aUserID : String, aUserEmail : String, aBody : String, aDate : String) {
         id = anId
-        userName = aName
+        userID = aUserID
+        userEmail = aUserEmail
         body = aBody
         timeCreated = aDate
     }
