@@ -151,39 +151,41 @@ class ChatViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-}
-
-func uploadImage(_ image: UIImage) {
-    
-    
-    let ref = FIRStorage.storage().reference()
-    guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {return}
-    let metaData = FIRStorageMetadata()
-    metaData.contentType = "image/jpeg"
-    ref.child("studentImage.jpeg").put(imageData, metadata: metaData) { (meta, error) in
+    let dateFormat : DateFormatter = {
+        let _dateFormatter = DateFormatter()
+        let locale = Locale(identifier: "en_US_POSIX")
+        _dateFormatter.locale = locale
+        _dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z"
+        return _dateFormatter
+    }()
+   
+    func uploadImage(_ image: UIImage) {
         
-        if let downloadPath = meta?.downloadURL()?.absoluteString {
-            //save to firebase database
-            saveImagePath(downloadPath)
+        
+        let ref = FIRStorage.storage().reference()
+        guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {return}
+        let metaData = FIRStorageMetadata()
+        metaData.contentType = "image/jpeg"
+        ref.child("\(currentUser!.email)-\(dateFormat.string(from: Date()))").put(imageData, metadata: metaData) { (meta, error) in
+            
+            if let downloadPath = meta?.downloadURL()?.absoluteString {
+                //save to firebase database
+                self.saveImagePath(downloadPath)
+            }
+            
         }
-        
     }
-}
-
-let dateFormat : DateFormatter = {
-    let _dateFormatter = DateFormatter()
-    let locale = Locale(identifier: "en_US_POSIX")
-    _dateFormatter.locale = locale
-    _dateFormatter.dateFormat = "'yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"
-    return _dateFormatter
-}()
-
-func saveImagePath(_ path: String) {
-    let dbRef = FIRDatabase.database().reference()
-    let chatValue : [String: Any] = ["name":"\(FIRAuth.auth()?.currentUser?.uid)", "timestamp": dateFormat.string(from: Date()), "image": path]
     
-    dbRef.child("chat").childByAutoId().setValue(chatValue)
+    func saveImagePath(_ path: String) {
+        let dbRef = FIRDatabase.database().reference()
+        let chatValue : [String: Any] = ["name":"\(FIRAuth.auth()?.currentUser?.uid)", "timestamp": dateFormat.string(from: Date()), "image": path]
+        lastId = lastId + 1
+        
+        dbRef.child("chat").child(currentChat.id).child("messages").child("\(lastId)").setValue(chatValue)
+    }
+    
 }
+
 
 extension ChatViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
