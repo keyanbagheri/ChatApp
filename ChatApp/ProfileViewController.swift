@@ -14,14 +14,46 @@ class ProfileViewController: UIViewController {
     
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
     var ref: FIRDatabaseReference!
+    var currentUserID : String = ""
+    
+    @IBOutlet weak var profileImageView: UIImageView!
+    
+    @IBOutlet weak var nameTextField: UITextField!
+    
+    @IBOutlet weak var descriptionTextView: UITextView!
+    
+    @IBOutlet weak var editProfileButton: UIButton!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         ref = FIRDatabase.database().reference()
 
-        // Do any additional setup after loading the view.
+        if let id = currentUser?.uid {
+            print(id)
+            currentUserID = id
+        }
     }
+    
+    @IBAction func logoutButton(_ sender: Any) {
+        
+        let firebaseAuth = FIRAuth.auth()
+        do {
+            try firebaseAuth?.signOut()
+            
+            //logged out
+            //go to sign in page
+            if let signInVC = storyboard?.instantiateViewController(withIdentifier: "AuthNavigationController") {
+                present(signInVC, animated: true, completion: nil)
+            }
+            
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        
+    }
+    
 
 //    func listenToFirebase() {
 //
@@ -31,7 +63,7 @@ class ProfileViewController: UIViewController {
 //            
 //            //infor -> snapshot.value, studentID -> snapshot.key
 //            guard let info = snapshot.value as? NSDictionary,
-//                let studentID = String(snapshot.key)
+//                let userID = String(snapshot.key)
 //                else {return}
 //            
 //            
@@ -42,11 +74,9 @@ class ProfileViewController: UIViewController {
 //                else {return}
 //            
 //            //get first index where studentID is matched
-//            if let matchedIndex = self..index(where: { (student) -> Bool in
-//                return student.id == studentID
-//            }) {
+//            if let matchedID = currentUser?.uid {
 //                
-//                let changedStudent = self.students[matchedIndex]
+//                let changedUser =
 //                changedStudent.name = name
 //                changedStudent.age = age
 //                let indexPath = IndexPath(row: matchedIndex, section: 0)
@@ -55,5 +85,23 @@ class ProfileViewController: UIViewController {
 //            
 //            
 //        })
-
+//
+//}
+    
+    func changeProfile() {
+        let screenName = nameTextField.text
+        
+        let post : [String : Any] = ["screenName": screenName,
+                                     "desc" : "",
+                                     "imageURL": ""]
+        
+        //                    //method 1
+        //                    let childUpdates = ["/student/\(key)": post]
+        //                    ref.updateChildValues(childUpdates)
+        
+        ref.child("user").child("\(currentUserID)").updateChildValues(post)
+        
+        
+    }
+    
 }

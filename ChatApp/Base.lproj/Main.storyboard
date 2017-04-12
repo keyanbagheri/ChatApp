@@ -292,14 +292,18 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="Edit Profile" id="gvY-fE-PkZ">
-                                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Hr7-Pl-QhH"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Logout" id="Hr7-Pl-QhH">
+                                            <connections>
+                                                <action selector="logoutButton:" destination="rjL-3A-0NK" id="0Qj-r6-Nwp"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vbk-Oo-l4J">
                                 <rect key="frame" x="0.0" y="253" width="375" height="124"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -349,6 +353,12 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" id="i94-JI-39r"/>
+                    <connections>
+                        <outlet property="descriptionTextView" destination="vbk-Oo-l4J" id="s4g-QT-WTT"/>
+                        <outlet property="editProfileButton" destination="lVF-XO-umO" id="VzJ-z5-1dm"/>
+                        <outlet property="nameTextField" destination="qGn-kH-SZd" id="neC-KM-WFH"/>
+                        <outlet property="profileImageView" destination="Gbb-v2-qZd" id="9Oz-zl-niZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Ff-lJ-ey5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -408,7 +418,7 @@
         <!--Sign In View Controller-->
         <scene sceneID="fLw-6y-Daf">
             <objects>
-                <viewController storyboardIdentifier="SignInViewController" id="mm7-Ba-VtG" customClass="SignInViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mm7-Ba-VtG" customClass="SignInViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bQW-06-kyD"/>
                         <viewControllerLayoutGuide type="bottom" id="mxu-UE-ke2"/>
@@ -475,7 +485,7 @@
         <!--Title-->
         <scene sceneID="9Jh-gs-Peu">
             <objects>
-                <viewController storyboardIdentifier="SignUpViewController" id="4gC-sg-j9N" customClass="SignUpViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4gC-sg-j9N" customClass="SignUpViewController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uSQ-tZ-lmH"/>
                         <viewControllerLayoutGuide type="bottom" id="lh2-YM-76h"/>
