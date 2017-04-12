@@ -287,6 +287,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <state key="normal" title="edit"/>
+                                <connections>
+                                    <action selector="editPictureButton:" destination="rjL-3A-0NK" eventType="touchUpInside" id="5X8-pd-nDK"/>
+                                </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DeP-jo-Agw">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -303,7 +306,6 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vbk-Oo-l4J">
                                 <rect key="frame" x="0.0" y="253" width="375" height="124"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -316,6 +318,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lVF-XO-umO">
                                 <rect key="frame" x="150" y="385" width="75" height="30"/>
                                 <state key="normal" title="Edit Profile"/>
+                                <connections>
+                                    <action selector="editProfileButton:" destination="rjL-3A-0NK" eventType="touchUpInside" id="IOE-wi-MKn"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qGn-kH-SZd">
                                 <rect key="frame" x="0.0" y="223" width="375" height="30"/>
@@ -355,7 +360,6 @@
                     <tabBarItem key="tabBarItem" title="Profile" id="i94-JI-39r"/>
                     <connections>
                         <outlet property="descriptionTextView" destination="vbk-Oo-l4J" id="s4g-QT-WTT"/>
-                        <outlet property="editProfileButton" destination="lVF-XO-umO" id="VzJ-z5-1dm"/>
                         <outlet property="nameTextField" destination="qGn-kH-SZd" id="neC-KM-WFH"/>
                         <outlet property="profileImageView" destination="Gbb-v2-qZd" id="9Oz-zl-niZ"/>
                     </connections>

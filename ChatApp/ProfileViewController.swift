@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
 
 class ProfileViewController: UIViewController {
     
@@ -22,8 +23,6 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var descriptionTextView: UITextView!
     
-    @IBOutlet weak var editProfileButton: UIButton!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +33,10 @@ class ProfileViewController: UIViewController {
             print(id)
             currentUserID = id
         }
+    }
+    
+    func setUpProfile() {
+        
     }
     
     @IBAction func logoutButton(_ sender: Any) {
@@ -54,56 +57,103 @@ class ProfileViewController: UIViewController {
         
     }
     
-
-//    func listenToFirebase() {
-//
-//        
-//        ref.child("user").observe(.childChanged, with: {(snapshot) in
-//            print("Changed :", snapshot)
-//            
-//            //infor -> snapshot.value, studentID -> snapshot.key
-//            guard let info = snapshot.value as? NSDictionary,
-//                let userID = String(snapshot.key)
-//                else {return}
-//            
-//            
-//            //get age and name from the "info/snapshot value"
-//            guard let screenName = info["screenName"] as? String,
-//                let description = info["dsc"] as? String,
-//                let imageURL = info["imageURL"] as? String
-//                else {return}
-//            
-//            //get first index where studentID is matched
-//            if let matchedID = currentUser?.uid {
-//                
-//                let changedUser =
-//                changedStudent.name = name
-//                changedStudent.age = age
-//                let indexPath = IndexPath(row: matchedIndex, section: 0)
-//                self.tableView.reloadRows(at: [indexPath], with: .fade)
-//            }
-//            
-//            
-//        })
-//
-//}
-    
-    func changeProfile() {
+    @IBAction func editProfileButton(_ sender: Any) {
+        
         let screenName = nameTextField.text
         let description = descriptionTextView.text
         let imageURL = ""
         
         let post : [String : Any] = ["screenName": screenName,
-                                     "desc" : "",
-                                     "imageURL": ""]
+                                     "desc" : description,
+                                     "imageURL": imageURL]
         
         //                    //method 1
         //                    let childUpdates = ["/student/\(key)": post]
         //                    ref.updateChildValues(childUpdates)
         
-        ref.child("user").child("\(currentUserID)").updateChildValues(post)
+        ref.child("users").child("\(currentUserID)").updateChildValues(post)
         
         
     }
     
+    
+    @IBAction func editPictureButton(_ sender: Any) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        present(imagePicker, animated: true, completion: nil)
+        
+        
+    }
+    
+
+    
+    func dismissImagePicker() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func uploadImage(_ image: UIImage) {
+        
+        let ref = FIRStorage.storage().reference()
+        guard let imageData = UIImageJPEGRepresentation(image, 0.5) else {return}
+        let metaData = FIRStorageMetadata()
+        metaData.contentType = "image/jpeg"
+        ref.child("\(currentUser?.email)-\(createTimeStamp()).jpeg").put(imageData, metadata: metaData) { (meta, error) in
+            
+            if let downloadPath = meta?.downloadURL()?.absoluteString {
+                //save to firebase database
+                self.saveImagePath(downloadPath)
+            }
+            
+        }
+        
+        
+    }
+    
+    func createTimeStamp() -> String {
+        
+        let currentDate = NSDate()
+        let dateFormatter:DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM-dd HH:mm"
+        let timeCreated = dateFormatter.string(from: currentDate as Date)
+        
+        return timeCreated
+        
+    }
+    
+    func saveImagePath(_ path: String) {
+        
+        let profileValue : [String: Any] = ["userID": currentUser!.uid, "userEmail": currentUser!.email, "body":"\(currentUser!.uid)-\(createTimeStamp())", "timestamp": createTimeStamp(), "image": path]
+        
+        ref.child("users").child(currentUserID).child("imageURL").updateChildValues(profileValue)
+    }
 }
+
+
+extension ProfileViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        defer {
+            dismissImagePicker()
+        }
+        
+        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+            return
+        }
+        
+        //display / store
+        uploadImage(image)
+        
+    }
+    
+    func uniqueFileForUser(_ name: String) -> String {
+        let currentDate = Date()
+        return "\(name)_\(currentDate.timeIntervalSince1970).jpeg"
+    }
+    
+    
+}
+
+    
+    
+
