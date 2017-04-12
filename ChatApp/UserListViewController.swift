@@ -47,8 +47,15 @@ class UserListViewController: UIViewController {
         usersTableView.dataSource = self
         
         listenToFirebase()
+//        
+//        let firebaseAuth = FIRAuth.auth()
+//        do {
+//            try firebaseAuth?.signOut()
+//        } catch let signOutError as NSError {
+//            print ("Error signing out", signOutError)
+//        }
         //createPersonalisedUserList()
-        filterForCurrentUserObject()
+//        filterForCurrentUserObject()
         
         
         
@@ -57,45 +64,6 @@ class UserListViewController: UIViewController {
 //        print("UID -> \(FIRAuth.auth()?.currentUser?.uid)")
         
     }
-    
-//    func createPersonalisedUserList() {
-//        self.personalisedUserList = usersList.filter {
-//            
-//            return $0.email.range(of: "\(FIRAuth.auth()?.currentUser?.email)") == nil
-//        }
-//        usersTableView.reloadData()
-//    }
-    
-    func createPersonalisedUserList() {
-        if usersList.count > 0 {
-            
-        for user in usersList {
-            if user.id != "\(FIRAuth.auth()?.currentUser?.uid)" {
-                personalisedUserList.append(user)
-            }
-        }
-            
-        } else {
-            return
-        }
-    }
-    
-    func filterForCurrentUserObject() {
-        var filteredUserArray : [User] = []
-        
-        for user in usersList {
-            if user.email == "\(FIRAuth.auth()?.currentUser?.uid)" {
-                filteredUserArray.append(user)
-            }
-        }
-//        self.currentUser = filteredUserArray
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        //createPersonalisedUserList()
-        
-    }
-
     
     
     func listenToFirebase() {
@@ -154,8 +122,11 @@ class UserListViewController: UIViewController {
         
         if let email = userInfo["email"] as? String,
             let userID = id as? String {
-            let newUser = User(anId : userID, anEmail : email, aScreenName : "FIX SN", aDesc : "FIX DESC", anImageURL : "FIX IMAGE URL")
-            self.usersList.append(newUser)
+            let newUser = User(anId : userID, anEmail : email, aScreenName : "ANONYMOUS", aDesc : "ADD DESC", anImageURL : "ADD IMAGE URL")
+            
+            if userID != currentUser?.uid {
+                self.usersList.append(newUser)
+            }
             
         }
         
@@ -197,7 +168,7 @@ extension UserListViewController : UITableViewDelegate, UITableViewDataSource {
         
         let chatID = "\(userIDs[0])-\(userIDs[1])"
         
-        let newChat = Chat(anId: chatID, userOneId: currentUserID, userOneEmail: currentUserEmail, userOneScreenName: "FIX SN", userOneImageURL: "FIX IMAGE URL", userTwoId: selectedPerson.id, userTwoEmail: selectedPerson.email, userTwoScreenName: "FIX SN", userTwoImageURL: "FIX IMAGE URL")
+        let newChat = Chat(anId: chatID, userOneId: currentUserID, userOneEmail: currentUserEmail, userOneScreenName: "Screen Name A", userOneImageURL: "FIX IMAGE URL", userTwoId: selectedPerson.id, userTwoEmail: selectedPerson.email, userTwoScreenName: "Screen Name 1", userTwoImageURL: "FIX IMAGE URL")
         
         ref.child("chat").child(newChat.id).observe(.value, with: { (snapshot) in
             

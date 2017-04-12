@@ -32,10 +32,10 @@ class ChatViewController: UIViewController {
         
         if let email = currentUser?.email {
             self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!]
-            if currentUser?.email == currentChat.userEmails[0] {
-                self.navigationItem.title = "\(currentChat.userEmails[1])"
+            if currentUser?.email == currentChat.userIds[0] {
+                self.navigationItem.title = "\(currentChat.userScreenNames[1])"
             } else {
-                self.navigationItem.title = "\(currentChat.userEmails[0])"
+                self.navigationItem.title = "\(currentChat.userScreenNames[0])"
             }
         }
         

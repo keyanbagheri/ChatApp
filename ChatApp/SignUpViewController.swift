@@ -72,7 +72,7 @@ class SignUpViewController: UIViewController {
             
             print("User ID \(user.uid) with email: \(String(describing: user.email)) created")
             
-            let post : [String : String] = ["email": user.email!]
+            let post : [String : String] = ["email": user.email!, "screenName": "ANONYMOUS", "desc": "Add a Description", "imageURL" : "default.png"]
             self.ref.child("users").child("\(user.uid)").updateChildValues(post)
             
             self.directToMainNaviController()
