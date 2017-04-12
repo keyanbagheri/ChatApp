@@ -15,6 +15,7 @@
 		6787A6EE1E9DC66200E091D3 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6787A6ED1E9DC66200E091D3 /* ImageViewController.swift */; };
 		679688E21E9B88C0006675E5 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679688E11E9B88C0006675E5 /* Chat.swift */; };
 		679688E41E9B8A7F006675E5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679688E31E9B8A7F006675E5 /* User.swift */; };
+		67B454D71E9E045700B93710 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B454D61E9E045700B93710 /* ProfileViewController.swift */; };
 		67E87D761E9B645D00772804 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E87D751E9B645D00772804 /* SignUpViewController.swift */; };
 		67E87D7A1E9B648600772804 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E87D791E9B648600772804 /* SignInViewController.swift */; };
 		67FB98F51E977C120078BC0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FB98F41E977C120078BC0F /* AppDelegate.swift */; };
@@ -38,6 +39,7 @@
 		6787A6ED1E9DC66200E091D3 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		679688E11E9B88C0006675E5 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		679688E31E9B8A7F006675E5 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		67B454D61E9E045700B93710 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		67E87D751E9B645D00772804 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		67E87D791E9B648600772804 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		67FB98F11E977C120078BC0F /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +116,7 @@
 				67FB99061E97843D0078BC0F /* ChatViewController.swift */,
 				6787A6ED1E9DC66200E091D3 /* ImageViewController.swift */,
 				67FB98F81E977C120078BC0F /* Main.storyboard */,
+				67B454D61E9E045700B93710 /* ProfileViewController.swift */,
 				67FB98FB1E977C120078BC0F /* Assets.xcassets */,
 				67FB98FD1E977C120078BC0F /* LaunchScreen.storyboard */,
 				67FB99001E977C120078BC0F /* Info.plist */,
@@ -267,6 +270,7 @@
 				679688E41E9B8A7F006675E5 /* User.swift in Sources */,
 				679688E21E9B88C0006675E5 /* Chat.swift in Sources */,
 				1A3635D11E9D20B3003189AB /* ImageTableViewCell.swift in Sources */,
+				67B454D71E9E045700B93710 /* ProfileViewController.swift in Sources */,
 				67FB99071E97843D0078BC0F /* ChatViewController.swift in Sources */,
 				67FB98F51E977C120078BC0F /* AppDelegate.swift in Sources */,
 			);
