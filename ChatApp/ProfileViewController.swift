@@ -90,6 +90,8 @@ class ProfileViewController: UIViewController {
     
     func changeProfile() {
         let screenName = nameTextField.text
+        let description = descriptionTextView.text
+        let imageURL = ""
         
         let post : [String : Any] = ["screenName": screenName,
                                      "desc" : "",
