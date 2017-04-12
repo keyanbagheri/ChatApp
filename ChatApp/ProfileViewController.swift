@@ -16,12 +16,19 @@ class ProfileViewController: UIViewController {
     var currentUser : FIRUser? = FIRAuth.auth()?.currentUser
     var ref: FIRDatabaseReference!
     var currentUserID : String = ""
+    var profileScreenName : String = ""
+    var profileImageURL : String = ""
+    var profileEmail : String = ""
+    var profileDesc : String = ""
     
     @IBOutlet weak var profileImageView: UIImageView!
     
     @IBOutlet weak var nameTextField: UITextField!
     
     @IBOutlet weak var descriptionTextView: UITextView!
+    
+    @IBOutlet weak var emailLabel: UILabel!
+    
     
 
     override func viewDidLoad() {
@@ -33,11 +40,44 @@ class ProfileViewController: UIViewController {
             print(id)
             currentUserID = id
         }
+        
+        listenToFirebase()
+        
     }
     
     func setUpProfile() {
+        nameTextField.text = profileScreenName
+        descriptionTextView.text = profileDesc
+        emailLabel.text = profileEmail
+        
+        let messageURL = profileImageURL
+        profileImageView.loadImageUsingCacheWithUrlString(urlString: messageURL)
+        
+        
+        print("")
+    }
+    
+    func listenToFirebase() {
+        ref.child("users").child(currentUserID).observe(.value, with: { (snapshot) in
+            print("Value : " , snapshot)
+        
+            let dictionary = snapshot.value as? [String: String]
+            
+            self.profileScreenName = (dictionary?["screenName"])!
+            self.profileImageURL = (dictionary?["imageURL"])!
+            self.profileEmail = (dictionary?["email"])!
+            self.profileDesc = (dictionary?["desc"])!
+
+            
+            print("")
+            
+            self.setUpProfile()
+        })
         
     }
+    
+    
+    
     
     @IBAction func logoutButton(_ sender: Any) {
         
@@ -61,7 +101,7 @@ class ProfileViewController: UIViewController {
         
         let screenName = nameTextField.text
         let description = descriptionTextView.text
-        let imageURL = ""
+        let imageURL = "default.png"
         
         let post : [String : Any] = ["screenName": screenName,
                                      "desc" : description,
