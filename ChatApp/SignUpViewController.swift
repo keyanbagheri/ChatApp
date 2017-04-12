@@ -79,7 +79,7 @@ class SignUpViewController: UIViewController {
         }
     }
     func directToMainNaviController() {
-        if let mainNavi = storyboard?.instantiateViewController(withIdentifier: "MainNavigationController") {
+        if let mainNavi = storyboard?.instantiateViewController(withIdentifier: "TabBarController") {
             present(mainNavi, animated: true, completion: nil)
         }
     }

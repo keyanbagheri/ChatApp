@@ -154,27 +154,12 @@ class UserListViewController: UIViewController {
         
         if let email = userInfo["email"] as? String,
             let userID = id as? String {
-            let newUser = User(anId : userID, anEmail : email)
+            let newUser = User(anId : userID, anEmail : email, aScreenName : "FIX SN", aDesc : "FIX DESC", anImageURL : "FIX IMAGE URL")
             self.usersList.append(newUser)
             
         }
         
         
-    }
-    
-    
-
-    @IBAction func logoutButtonTapped(_ sender: Any) {
-        let firebaseAuth = FIRAuth.auth()
-        do {
-            try firebaseAuth?.signOut()
-            
-            if let logInVC = storyboard?.instantiateViewController(withIdentifier: "AuthNavigationController") {
-                present(logInVC, animated: true, completion: nil)
-            }
-        } catch let signOutError as NSError {
-            print ("Error signing out: %@", signOutError)
-        }
     }
 
 }
@@ -212,7 +197,7 @@ extension UserListViewController : UITableViewDelegate, UITableViewDataSource {
         
         let chatID = "\(userIDs[0])-\(userIDs[1])"
         
-        let newChat = Chat(anId: chatID, userOneId: currentUserID , userTwoId: selectedPerson.id)
+        let newChat = Chat(anId: chatID, userOneId: currentUserID, userOneEmail: currentUserEmail, userOneScreenName: "FIX SN", userOneImageURL: "FIX IMAGE URL", userTwoId: selectedPerson.id, userTwoEmail: selectedPerson.email, userTwoScreenName: "FIX SN", userTwoImageURL: "FIX IMAGE URL")
         
         ref.child("chat").child(newChat.id).observe(.value, with: { (snapshot) in
             

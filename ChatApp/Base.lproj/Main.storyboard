@@ -316,13 +316,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="SHT-nP-7Uu">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="lRa-jZ-IJd">
-                            <connections>
-                                <action selector="logoutButtonTapped:" destination="ViD-ce-if9" id="uZ6-qD-F0U"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="SHT-nP-7Uu"/>
                     <connections>
                         <outlet property="usersTableView" destination="BkG-lp-Qri" id="Y3v-lg-bTP"/>
                     </connections>

@@ -20,7 +20,7 @@ class SignInViewController: UIViewController {
         if (FIRAuth.auth()?.currentUser) != nil {
             print("Some user already logged in")
             // go to main page
-            if let mainNavi = storyboard?.instantiateViewController(withIdentifier: "MainNavigationController") {
+            if let mainNavi = storyboard?.instantiateViewController(withIdentifier: "TabBarController") {
                 present(mainNavi, animated: true, completion: nil)
             }
         }
@@ -68,7 +68,7 @@ class SignInViewController: UIViewController {
     }
     
     func directToMainNaviController() {
-        if let mainNavi = storyboard?.instantiateViewController(withIdentifier: "MainNavigationController") {
+        if let mainNavi = storyboard?.instantiateViewController(withIdentifier: "TabBarController") {
             present(mainNavi, animated: true, completion: nil)
         }
     }

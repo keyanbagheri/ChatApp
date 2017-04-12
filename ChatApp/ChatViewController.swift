@@ -32,7 +32,11 @@ class ChatViewController: UIViewController {
         
         if let email = currentUser?.email {
             self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!]
-            self.navigationItem.title = "Logged in as: \(email)"
+            if currentUser?.email == currentChat.userEmails[0] {
+                self.navigationItem.title = "\(currentChat.userEmails[1])"
+            } else {
+                self.navigationItem.title = "\(currentChat.userEmails[0])"
+            }
         }
         
         chatTableView.delegate = self
