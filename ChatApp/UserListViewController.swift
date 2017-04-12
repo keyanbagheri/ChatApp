@@ -13,7 +13,6 @@ import FirebaseDatabase
 class UserListViewController: UIViewController {
     
     
-    
     @IBOutlet weak var usersTableView: UITableView!
     
     var ref: FIRDatabaseReference!
