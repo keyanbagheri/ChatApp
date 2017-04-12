@@ -284,7 +284,7 @@ extension ChatViewController : UITableViewDelegate, UITableViewDataSource {
         }
     }
     @IBAction func backButtonTapped(_ sender: Any) {
-        if let mainNavi = storyboard?.instantiateViewController(withIdentifier: "MainNavigationController") {
+        if let mainNavi = storyboard?.instantiateViewController(withIdentifier: "TabBarController") {
             present(mainNavi, animated: true, completion: nil)
         }
     }
