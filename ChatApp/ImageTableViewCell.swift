@@ -13,9 +13,9 @@ class ImageTableViewCell: UITableViewCell {
     @IBOutlet weak var chatImageView: UIImageView! {
         didSet{
             
-//            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chatImageView.imageTapped))
-//            chatImageView.isUserInteractionEnabled = true
-//            chatImageView.addGestureRecognizer(tapGestureRecognizer)
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chatImageView.imageTapped))
+            chatImageView.isUserInteractionEnabled = true
+            chatImageView.addGestureRecognizer(tapGestureRecognizer)
             
         }
     }
@@ -72,14 +72,14 @@ extension UIImageView {
         }).resume()
     }
     
-//    func imageTapped() {
-//        let bigImageView = UIImageView(image: self.image)
-//        bigImageView.contentMode = UIViewContentMode.scaleAspectFit
-//        bigImageView.frame = (self.inputView?.frame)!
-//        self.inputViewController?.view.addSubview(bigImageView)
-//        
-//        
-//    }
+    func imageTapped() {
+        let bigImageView = UIImageView(image: self.image)
+        bigImageView.contentMode = UIViewContentMode.scaleAspectFit
+        bigImageView.frame = (self.inputView?.frame)!
+        self.inputViewController?.view.addSubview(bigImageView)
+        
+        
+    }
     
     
 }
