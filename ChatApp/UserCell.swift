@@ -19,9 +19,13 @@ class UserCell: UITableViewCell {
     @IBOutlet weak var labelProfileName: UILabel!
     
     @IBOutlet weak var labelProfileStatus: UILabel!
+    
+    @IBOutlet weak var customView: UIView!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
+
         
         
     }
@@ -33,3 +37,5 @@ class UserCell: UITableViewCell {
     }
     
 }
+
+

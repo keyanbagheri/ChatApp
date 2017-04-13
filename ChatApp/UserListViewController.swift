@@ -22,7 +22,11 @@ class UserListViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView! {
+        didSet{
+            
+        }
+    }
     
     
     
@@ -57,8 +61,8 @@ class UserListViewController: UIViewController {
     func setUpPersonalisedUI() {
         if let email = currentUser?.email {
             currentUserEmail = email
-            self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!]
-            self.navigationItem.title = "Logged in as: \(self.profileScreenName)"
+            self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Helvetica-Bold", size: 18)!]
+            self.navigationItem.title = "\(self.profileScreenName)'s Chats"
             
             self.profileImageView.loadImageUsingCacheWithUrlString(urlString: self.profileImageURL)
         }
@@ -153,6 +157,7 @@ class UserListViewController: UIViewController {
 //TABLEVIEW DELEGATE AND DATASOURCE
 
 extension UserListViewController : UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return usersList.count
     }
@@ -185,7 +190,7 @@ extension UserListViewController : UITableViewDelegate, UITableViewDataSource {
         
         let chatID = "\(userIDs[0])-\(userIDs[1])"
         
-        let newChat = Chat(anId: chatID, userOneId: currentUserID, userOneEmail: currentUserEmail, userOneScreenName: "Screen Name A", userOneImageURL: "FIX IMAGE URL", userTwoId: selectedPerson.id, userTwoEmail: selectedPerson.email, userTwoScreenName: "Screen Name 1", userTwoImageURL: "FIX IMAGE URL")
+        let newChat = Chat(anId: chatID, userOneId: currentUserID, userOneEmail: currentUserEmail, userOneScreenName: profileScreenName, userOneImageURL: profileImageURL, userTwoId: selectedPerson.id, userTwoEmail: selectedPerson.email, userTwoScreenName: selectedPerson.screenName, userTwoImageURL: selectedPerson.imageURL)
         
         ref.child("chat").child(newChat.id).observe(.value, with: { (snapshot) in
             
@@ -240,6 +245,7 @@ extension UserListViewController : UITableViewDelegate, UITableViewDataSource {
     
     
 }
+
 
 
 

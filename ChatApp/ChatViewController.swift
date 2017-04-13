@@ -33,8 +33,8 @@ class ChatViewController: UIViewController {
         ref = FIRDatabase.database().reference()
         
         if let email = currentUser?.email {
-            self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!]
-            if currentUser?.email == currentChat.userIds[0] {
+            self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Helvetica-Bold", size: 18)!]
+            if email == currentChat.userEmails[0] {
                 self.navigationItem.title = "\(currentChat.userScreenNames[1])"
             } else {
                 self.navigationItem.title = "\(currentChat.userScreenNames[0])"
@@ -234,9 +234,16 @@ extension ChatViewController : UITableViewDelegate, UITableViewDataSource {
         if currentMessage.imageURL != "nil" {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ImageTableViewCell") as? ImageTableViewCell else {return UITableViewCell()}
             
+            if currentMessage.userEmail == currentChat.userEmails[0] {
+                cell.nameLabel.text = currentChat.userScreenNames[0]
+            } else {
+                cell.nameLabel.text = currentChat.userScreenNames[1]
+            }
+            
+            
             let messageURL = currentMessage.imageURL
             cell.chatImageView.loadImageUsingCacheWithUrlString(urlString: messageURL)
-            cell.nameLabel.text = currentMessage.userEmail
+
             cell.timeSentLabel.text = currentMessage.timestamp
             
             
@@ -247,7 +254,12 @@ extension ChatViewController : UITableViewDelegate, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ChatTableViewCell") as? ChatTableViewCell else {return UITableViewCell()}
             
             
-            cell.userNameLabel.text = currentMessage.userEmail
+            if currentMessage.userEmail == currentChat.userEmails[0] {
+                cell.userNameLabel.text = currentChat.userScreenNames[0]
+            } else {
+                cell.userNameLabel.text = currentChat.userScreenNames[1]
+            }
+            
             cell.timeCreatedLabel.text = currentMessage.timestamp
             cell.bodyTextView.text = currentMessage.body
             
