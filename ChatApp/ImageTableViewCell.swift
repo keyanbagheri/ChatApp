@@ -13,9 +13,9 @@ class ImageTableViewCell: UITableViewCell {
     @IBOutlet weak var chatImageView: UIImageView! {
         didSet{
             
-            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chatImageView.imageTapped))
-            chatImageView.isUserInteractionEnabled = true
-            chatImageView.addGestureRecognizer(tapGestureRecognizer)
+//            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chatImageView.imageTapped))
+//            chatImageView.isUserInteractionEnabled = true
+//            chatImageView.addGestureRecognizer(tapGestureRecognizer)
             
         }
     }
