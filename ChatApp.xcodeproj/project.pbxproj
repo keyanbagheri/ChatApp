@@ -12,6 +12,7 @@
 		1A3635FA1E9E02D7003189AB /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A3635F81E9E02D7003189AB /* UserCell.xib */; };
 		1A4E27FB1E9BC504006DF5B5 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4E27FA1E9BC504006DF5B5 /* UserTableViewCell.swift */; };
 		1A573F731E9B8603000F387B /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A573F721E9B8603000F387B /* UserListViewController.swift */; };
+		1ADEF9871E9F61870063B2C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1ADEF9861E9F61870063B2C7 /* GoogleService-Info.plist */; };
 		6787A6EE1E9DC66200E091D3 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6787A6ED1E9DC66200E091D3 /* ImageViewController.swift */; };
 		679688E21E9B88C0006675E5 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679688E11E9B88C0006675E5 /* Chat.swift */; };
 		679688E41E9B8A7F006675E5 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679688E31E9B8A7F006675E5 /* User.swift */; };
@@ -24,18 +25,19 @@
 		67FB98FC1E977C120078BC0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67FB98FB1E977C120078BC0F /* Assets.xcassets */; };
 		67FB98FF1E977C120078BC0F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67FB98FD1E977C120078BC0F /* LaunchScreen.storyboard */; };
 		67FB99071E97843D0078BC0F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FB99061E97843D0078BC0F /* ChatViewController.swift */; };
-		67FB990B1E9789DB0078BC0F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 67FB990A1E9789DB0078BC0F /* GoogleService-Info.plist */; };
 		67FB990D1E978D800078BC0F /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FB990C1E978D800078BC0F /* Message.swift */; };
 		67FB990F1E97929D0078BC0F /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FB990E1E97929D0078BC0F /* ChatTableViewCell.swift */; };
 		C414F433D49D6A2CCB8B77BD /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D10788D2E7BB50C13C063FA0 /* Pods_ChatApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A29817C1E9F70BC0012B26B /* ChatApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChatApp.entitlements; sourceTree = "<group>"; };
 		1A3635D01E9D20B3003189AB /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		1A3635F71E9E02D7003189AB /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		1A3635F81E9E02D7003189AB /* UserCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
 		1A4E27FA1E9BC504006DF5B5 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		1A573F721E9B8603000F387B /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
+		1ADEF9861E9F61870063B2C7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6787A6ED1E9DC66200E091D3 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		679688E11E9B88C0006675E5 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		679688E31E9B8A7F006675E5 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -50,7 +52,6 @@
 		67FB98FE1E977C120078BC0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		67FB99001E977C120078BC0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67FB99061E97843D0078BC0F /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		67FB990A1E9789DB0078BC0F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		67FB990C1E978D800078BC0F /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		67FB990E1E97929D0078BC0F /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		B1AB444EB1BE563BAF22638A /* Pods-ChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 		67FB98F31E977C120078BC0F /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				1A29817C1E9F70BC0012B26B /* ChatApp.entitlements */,
 				67FB98F61E977C120078BC0F /* ViewController.swift */,
 				1A4E27FA1E9BC504006DF5B5 /* UserTableViewCell.swift */,
 				67FB98F41E977C120078BC0F /* AppDelegate.swift */,
@@ -120,7 +122,7 @@
 				67FB98FB1E977C120078BC0F /* Assets.xcassets */,
 				67FB98FD1E977C120078BC0F /* LaunchScreen.storyboard */,
 				67FB99001E977C120078BC0F /* Info.plist */,
-				67FB990A1E9789DB0078BC0F /* GoogleService-Info.plist */,
+				1ADEF9861E9F61870063B2C7 /* GoogleService-Info.plist */,
 			);
 			path = ChatApp;
 			sourceTree = "<group>";
@@ -168,7 +170,13 @@
 				TargetAttributes = {
 					67FB98F01E977C120078BC0F = {
 						CreatedOnToolsVersion = 8.2.1;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = ZQ547JDPVM;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -196,8 +204,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				67FB98FF1E977C120078BC0F /* LaunchScreen.storyboard in Resources */,
-				67FB990B1E9789DB0078BC0F /* GoogleService-Info.plist in Resources */,
 				67FB98FC1E977C120078BC0F /* Assets.xcassets in Resources */,
+				1ADEF9871E9F61870063B2C7 /* GoogleService-Info.plist in Resources */,
 				67FB98FA1E977C120078BC0F /* Main.storyboard in Resources */,
 				1A3635FA1E9E02D7003189AB /* UserCell.xib in Resources */,
 			);
@@ -394,10 +402,15 @@
 			baseConfigurationReference = B1AB444EB1BE563BAF22638A /* Pods-ChatApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ChatApp/ChatApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = ZQ547JDPVM;
 				INFOPLIST_FILE = ChatApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = maxkey.ChatApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "2d0c9d3a-5058-461e-b257-f776fed034ef";
+				PROVISIONING_PROFILE_SPECIFIER = "ChatApp - Dev";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -407,10 +420,15 @@
 			baseConfigurationReference = F121E5B5C0E75805B41C6BF6 /* Pods-ChatApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = ChatApp/ChatApp.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = ZQ547JDPVM;
 				INFOPLIST_FILE = ChatApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = maxkey.ChatApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8c3afc90-8d98-4bc6-a996-d49ff91a83db";
+				PROVISIONING_PROFILE_SPECIFIER = "Chat App - AppStore";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

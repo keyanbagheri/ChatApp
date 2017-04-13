@@ -16,6 +16,8 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.hideKeyboardWhenTappedAround()
+        
         // Do any additional setup after loading the view.
         if (FIRAuth.auth()?.currentUser) != nil {
             print("Some user already logged in")
@@ -24,7 +26,9 @@ class SignInViewController: UIViewController {
                 present(mainNavi, animated: true, completion: nil)
             }
         }
+        
     }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -77,5 +81,21 @@ class SignInViewController: UIViewController {
         if let signUpVC = storyboard?.instantiateViewController(withIdentifier: "SignUpViewController") {
             navigationController?.pushViewController(signUpVC, animated: true)
         }
+    }
+}
+
+
+
+
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

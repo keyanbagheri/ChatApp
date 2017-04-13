@@ -13,7 +13,18 @@ import FirebaseDatabase
 class UserListViewController: UIViewController {
     
     
-    @IBOutlet weak var usersTableView: UITableView!
+    @IBOutlet weak var usersTableView: UITableView! {
+        didSet{
+            usersTableView.delegate = self
+            usersTableView.dataSource = self
+            
+            usersTableView.register(UserCell.cellNib, forCellReuseIdentifier: UserCell.cellIdentifier)
+        }
+    }
+    
+    @IBOutlet weak var profileImageView: UIImageView!
+    
+    
     
     var ref: FIRDatabaseReference!
     
@@ -21,6 +32,8 @@ class UserListViewController: UIViewController {
     
     var currentUserID : String = ""
     var currentUserEmail: String = ""
+    var profileScreenName: String = ""
+    var profileImageURL: String = ""
     
     var usersList : [User] = []
     
@@ -31,46 +44,45 @@ class UserListViewController: UIViewController {
         super.viewDidLoad()
         
         ref = FIRDatabase.database().reference()
-
-        if let email = currentUser?.email {
-            currentUserEmail = email
-            self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!]
-            self.navigationItem.title = "Logged in as: \(email)"
-        }
         
         if let id = currentUser?.uid {
             print(id)
             currentUserID = id
         }
         
-        usersTableView.delegate = self
-        usersTableView.dataSource = self
-        
         listenToFirebase()
-//        
-//        let firebaseAuth = FIRAuth.auth()
-//        do {
-//            try firebaseAuth?.signOut()
-//        } catch let signOutError as NSError {
-//            print ("Error signing out", signOutError)
-//        }
-        //createPersonalisedUserList()
-//        filterForCurrentUserObject()
         
-        
-        
-        
-        
-//        print("UID -> \(FIRAuth.auth()?.currentUser?.uid)")
-        
+    }
+    
+    func setUpPersonalisedUI() {
+        if let email = currentUser?.email {
+            currentUserEmail = email
+            self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Helvetica", size: 12)!]
+            self.navigationItem.title = "Logged in as: \(self.profileScreenName)"
+            
+            self.profileImageView.loadImageUsingCacheWithUrlString(urlString: self.profileImageURL)
+        }
     }
     
     
     func listenToFirebase() {
+        
         ref.child("users").observe(.value, with: { (snapshot) in
             print("Value : " , snapshot)
             
-            //self.createPersonalisedUserList()
+         })
+            
+            //observe current user
+            ref.child("users").child(currentUserID).observe(.value, with: { (snapshot) in
+                print("Value : " , snapshot)
+                
+                let dictionary = snapshot.value as? [String: String]
+                
+                self.profileScreenName = (dictionary?["screenName"])!
+                self.profileImageURL = (dictionary?["imageURL"])!
+                
+                self.setUpPersonalisedUI()
+            
         })
         
         // 2. get the snapshot
@@ -121,8 +133,11 @@ class UserListViewController: UIViewController {
     func addToUserList(id : Any, userInfo : NSDictionary) {
         
         if let email = userInfo["email"] as? String,
+            let screenName = userInfo["screenName"] as? String,
+            let desc = userInfo["desc"] as? String,
+            let imageURL = userInfo["imageURL"] as? String,
             let userID = id as? String {
-            let newUser = User(anId : userID, anEmail : email, aScreenName : "ANONYMOUS", aDesc : "ADD DESC", anImageURL : "ADD IMAGE URL")
+            let newUser = User(anId : userID, anEmail : email, aScreenName : screenName, aDesc : desc, anImageURL : imageURL)
             
             if userID != currentUser?.uid {
                 self.usersList.append(newUser)
@@ -143,10 +158,12 @@ extension UserListViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "userTableViewCell") as? UserTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: UserCell.cellIdentifier) as? UserCell
             else {return UITableViewCell()}
         let specificUser = usersList[indexPath.row]
-        cell.userEmailLabel.text = specificUser.email
+        cell.labelProfileName.text = specificUser.screenName
+        cell.labelProfileStatus.text = specificUser.desc
+        cell.imageViewProfile.loadImageUsingCacheWithUrlString(urlString: specificUser.imageURL)
         
         return cell
         
@@ -223,6 +240,8 @@ extension UserListViewController : UITableViewDelegate, UITableViewDataSource {
     
     
 }
+
+
 
 
 

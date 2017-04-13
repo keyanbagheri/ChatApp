@@ -19,25 +19,21 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.hideKeyboardWhenTappedAround()
+        
         // Do any additional setup after loading the view.
         ref = FIRDatabase.database().reference()
+        
+
     }
+    
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
     @IBAction func cancelButtonTapped(_ sender: Any) {
         if let logInVC = storyboard?.instantiateViewController(withIdentifier: "AuthNavigationController") {
             present(logInVC, animated: true, completion: nil)
@@ -60,6 +56,8 @@ class SignUpViewController: UIViewController {
         
         FIRAuth.auth()?.createUser(withEmail: email, password: password) { (user, error) in
             
+            let defaultImageURL = "https://firebasestorage.googleapis.com/v0/b/chatapp2-8fc6d.appspot.com/o/icon1.png?alt=media&token=a0c137ff-3053-442b-a6fb-3ef06f818d6a"
+            
             if error != nil {
                 return
             }
@@ -72,7 +70,7 @@ class SignUpViewController: UIViewController {
             
             print("User ID \(user.uid) with email: \(String(describing: user.email)) created")
             
-            let post : [String : String] = ["email": user.email!, "screenName": "ANONYMOUS", "desc": "Add a Description", "imageURL" : "default.png"]
+            let post : [String : String] = ["email": user.email!, "screenName": "ANONYMOUS", "desc": "Add a Description", "imageURL" : defaultImageURL]
             self.ref.child("users").child("\(user.uid)").updateChildValues(post)
             
             self.directToMainNaviController()

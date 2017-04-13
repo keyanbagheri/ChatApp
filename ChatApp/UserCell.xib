@@ -26,9 +26,9 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKR-cI-87E">
-                        <rect key="frame" x="57" y="4" width="162" height="21"/>
+                        <rect key="frame" x="57" y="4" width="218" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="162" id="mBj-17-ZEB"/>
+                            <constraint firstAttribute="width" constant="218" id="mBj-17-ZEB"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <color key="textColor" red="0.28211597290000001" green="0.3528828531" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

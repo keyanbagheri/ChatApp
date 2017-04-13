@@ -104,15 +104,9 @@ class ProfileViewController: UIViewController {
         let imageURL = "default.png"
         
         let post : [String : Any] = ["screenName": screenName,
-                                     "desc" : description,
-                                     "imageURL": imageURL]
-        
-        //                    //method 1
-        //                    let childUpdates = ["/student/\(key)": post]
-        //                    ref.updateChildValues(childUpdates)
+                                     "desc" : description]
         
         ref.child("users").child("\(currentUserID)").updateChildValues(post)
-        
         
     }
     
@@ -142,6 +136,8 @@ class ProfileViewController: UIViewController {
             if let downloadPath = meta?.downloadURL()?.absoluteString {
                 //save to firebase database
                 self.saveImagePath(downloadPath)
+                
+                print("")
             }
             
         }
@@ -162,9 +158,9 @@ class ProfileViewController: UIViewController {
     
     func saveImagePath(_ path: String) {
         
-        let profileValue : [String: Any] = ["userID": currentUser!.uid, "userEmail": currentUser!.email, "body":"\(currentUser!.uid)-\(createTimeStamp())", "timestamp": createTimeStamp(), "image": path]
+        let profileValue : [String: Any] = ["imageURL": path]
         
-        ref.child("users").child(currentUserID).child("imageURL").updateChildValues(profileValue)
+        ref.child("users").child(currentUserID).updateChildValues(profileValue)
     }
 }
 

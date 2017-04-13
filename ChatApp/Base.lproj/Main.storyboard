@@ -291,22 +291,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gbb-v2-qZd">
-                                <rect key="frame" x="19.5" y="53" width="100" height="100"/>
+                                <rect key="frame" x="19" y="67" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="CK9-fI-OmN"/>
                                     <constraint firstAttribute="height" constant="100" id="kOt-OB-VfT"/>
                                 </constraints>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter your name and add an optional profile picture and description." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cZy-ZD-PBN">
-                                <rect key="frame" x="127.5" y="68" width="239.5" height="71"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="02t-OD-dux">
-                                <rect key="frame" x="54" y="157" width="30" height="17"/>
+                                <rect key="frame" x="54" y="175" width="30" height="17"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="17" id="1CX-F9-OhS"/>
+                                    <constraint firstAttribute="height" constant="17" id="160-Q3-kqO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <state key="normal" title="edit"/>
@@ -315,7 +309,7 @@
                                 </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DeP-jo-Agw">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
                                 <items>
                                     <navigationItem title="Edit Profile" id="gvY-fE-PkZ">
                                         <barButtonItem key="leftBarButtonItem" title="Logout" id="Hr7-Pl-QhH">
@@ -327,7 +321,7 @@
                                 </items>
                             </navigationBar>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="vbk-Oo-l4J">
-                                <rect key="frame" x="0.0" y="253" width="375" height="124"/>
+                                <rect key="frame" x="0.0" y="239" width="375" height="138"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -346,38 +340,45 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qGn-kH-SZd">
-                                <rect key="frame" x="0.0" y="223" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="209" width="375" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter your name and add an optional profile picture and description." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cZy-ZD-PBN">
+                                <rect key="frame" x="127" y="82" width="240" height="67"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Puh-ig-dSu" firstAttribute="top" secondItem="L63-IE-Gu1" secondAttribute="bottom" constant="163" id="1sb-Ik-x14"/>
                             <constraint firstItem="lVF-XO-umO" firstAttribute="top" secondItem="vbk-Oo-l4J" secondAttribute="bottom" constant="8" id="3sc-gq-1PL"/>
                             <constraint firstAttribute="trailing" secondItem="qGn-kH-SZd" secondAttribute="trailing" id="4NO-m6-SuV"/>
+                            <constraint firstItem="02t-OD-dux" firstAttribute="leading" secondItem="r6T-bD-6Ge" secondAttribute="leadingMargin" constant="38" id="4T2-en-ysw"/>
                             <constraint firstItem="DeP-jo-Agw" firstAttribute="top" secondItem="r6T-bD-6Ge" secondAttribute="top" id="CGb-H3-PmT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lVF-XO-umO" secondAttribute="trailing" constant="134" id="DEI-dk-xWf"/>
                             <constraint firstItem="L63-IE-Gu1" firstAttribute="leading" secondItem="r6T-bD-6Ge" secondAttribute="leading" constant="16" id="DOS-E3-lep"/>
-                            <constraint firstItem="02t-OD-dux" firstAttribute="centerX" secondItem="Gbb-v2-qZd" secondAttribute="centerX" id="NlC-H6-ene"/>
+                            <constraint firstItem="02t-OD-dux" firstAttribute="top" secondItem="r6T-bD-6Ge" secondAttribute="top" constant="175" id="F5k-wz-aJw"/>
                             <constraint firstItem="DeP-jo-Agw" firstAttribute="leading" secondItem="qGn-kH-SZd" secondAttribute="leading" id="PO8-jD-AXq"/>
-                            <constraint firstItem="02t-OD-dux" firstAttribute="leading" secondItem="r6T-bD-6Ge" secondAttribute="leadingMargin" constant="38" id="SRL-AT-Pec"/>
+                            <constraint firstItem="qGn-kH-SZd" firstAttribute="top" secondItem="02t-OD-dux" secondAttribute="bottom" constant="17" id="QXY-iK-3mP"/>
                             <constraint firstItem="cZy-ZD-PBN" firstAttribute="top" secondItem="DeP-jo-Agw" secondAttribute="bottom" constant="24" id="TAw-OW-Yv6"/>
+                            <constraint firstItem="02t-OD-dux" firstAttribute="top" secondItem="Gbb-v2-qZd" secondAttribute="bottom" constant="8" symbolic="YES" id="TYD-GQ-Bcs"/>
                             <constraint firstAttribute="trailing" secondItem="L63-IE-Gu1" secondAttribute="trailing" constant="16" id="Vd4-Ds-z1V"/>
-                            <constraint firstItem="qGn-kH-SZd" firstAttribute="top" secondItem="02t-OD-dux" secondAttribute="bottom" constant="49" id="WjK-mb-jvp"/>
-                            <constraint firstItem="qGn-kH-SZd" firstAttribute="top" secondItem="cZy-ZD-PBN" secondAttribute="bottom" constant="84" id="Xa0-Is-lOr"/>
+                            <constraint firstItem="qGn-kH-SZd" firstAttribute="top" secondItem="cZy-ZD-PBN" secondAttribute="bottom" constant="60" id="Xa0-Is-lOr"/>
                             <constraint firstItem="lVF-XO-umO" firstAttribute="leading" secondItem="r6T-bD-6Ge" secondAttribute="leadingMargin" constant="134" id="Ziw-O5-kzD"/>
                             <constraint firstAttribute="trailing" secondItem="cZy-ZD-PBN" secondAttribute="trailing" constant="8" id="bSa-tI-ZvE"/>
                             <constraint firstItem="Gbb-v2-qZd" firstAttribute="top" secondItem="DeP-jo-Agw" secondAttribute="bottom" constant="9" id="dwm-uB-Zc9"/>
                             <constraint firstAttribute="trailing" secondItem="vbk-Oo-l4J" secondAttribute="trailing" id="hwK-2E-ZTD"/>
-                            <constraint firstItem="02t-OD-dux" firstAttribute="top" secondItem="Gbb-v2-qZd" secondAttribute="bottom" constant="4" id="iuW-B4-an8"/>
                             <constraint firstItem="vbk-Oo-l4J" firstAttribute="leading" secondItem="r6T-bD-6Ge" secondAttribute="leading" id="n3q-SF-iDX"/>
                             <constraint firstItem="qGn-kH-SZd" firstAttribute="leading" secondItem="r6T-bD-6Ge" secondAttribute="leading" id="ooy-L8-PJP"/>
                             <constraint firstItem="cZy-ZD-PBN" firstAttribute="leading" secondItem="Gbb-v2-qZd" secondAttribute="trailing" constant="8" id="sMF-Ub-1Ql"/>
                             <constraint firstItem="vbk-Oo-l4J" firstAttribute="top" secondItem="qGn-kH-SZd" secondAttribute="bottom" id="tSo-iv-1KV"/>
                             <constraint firstItem="DeP-jo-Agw" firstAttribute="trailing" secondItem="qGn-kH-SZd" secondAttribute="trailing" id="x5M-bu-sOa"/>
                             <constraint firstItem="L63-IE-Gu1" firstAttribute="top" secondItem="lVF-XO-umO" secondAttribute="bottom" constant="19" id="xKb-ER-H0S"/>
+                            <constraint firstItem="02t-OD-dux" firstAttribute="centerX" secondItem="Gbb-v2-qZd" secondAttribute="centerX" id="yjJ-ji-8gb"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Profile" id="i94-JI-39r"/>
@@ -434,8 +435,24 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="SHT-nP-7Uu"/>
+                    <navigationItem key="navigationItem" id="SHT-nP-7Uu">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="syv-iA-1f7">
+                            <view key="customView" contentMode="scaleToFill" id="Cib-em-dOF">
+                                <rect key="frame" x="16" y="5" width="150" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TAh-uc-LAu">
+                                        <rect key="frame" x="110" y="0.0" width="40" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="profileImageView" destination="TAh-uc-LAu" id="Pxa-rZ-8EH"/>
                         <outlet property="usersTableView" destination="BkG-lp-Qri" id="Y3v-lg-bTP"/>
                     </connections>
                 </viewController>
