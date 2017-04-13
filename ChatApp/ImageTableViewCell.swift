@@ -12,11 +12,11 @@ class ImageTableViewCell: UITableViewCell {
 
     @IBOutlet weak var chatImageView: UIImageView! {
         didSet{
-            
-//            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chatImageView.imageTapped))
+//            
+//            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showImage))
 //            chatImageView.isUserInteractionEnabled = true
 //            chatImageView.addGestureRecognizer(tapGestureRecognizer)
-            
+//            
         }
     }
     
@@ -35,6 +35,15 @@ class ImageTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func showImage() {
+        //        let bigImageView = UIImageView(image: self.image)
+        //        bigImageView.contentMode = UIViewContentMode.scaleAspectFit
+        //        bigImageView.frame = (self.inputView?.frame)!
+        //        self.inputViewController?.view.addSubview(bigImageView)
+//        print("HELLOOOOOO!!")
+    }
+    
     
 
 }
@@ -72,14 +81,6 @@ extension UIImageView {
         }).resume()
     }
     
-    func imageTapped() {
-        let bigImageView = UIImageView(image: self.image)
-        bigImageView.contentMode = UIViewContentMode.scaleAspectFit
-        bigImageView.frame = (self.inputView?.frame)!
-        self.inputViewController?.view.addSubview(bigImageView)
-        
-        
-    }
-    
+
     
 }

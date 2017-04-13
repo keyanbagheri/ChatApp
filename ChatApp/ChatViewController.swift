@@ -257,6 +257,16 @@ extension ChatViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        guard let controller = storyboard .instantiateViewController(withIdentifier: "ImageViewController") as?
+            ImageViewController else { return }
+        
+        controller.currentMessage = messages[indexPath.row]
+        
+        navigationController?.pushViewController(controller, animated: true)
+    }
     
     
     
