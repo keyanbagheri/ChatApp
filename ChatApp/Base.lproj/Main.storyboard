@@ -406,9 +406,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BkG-lp-Qri">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BkG-lp-Qri">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="userTableViewCell" id="par-7e-cjN" customClass="UserTableViewCell" customModule="ChatApp" customModuleProvider="target">
@@ -434,6 +433,13 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="BkG-lp-Qri" firstAttribute="top" secondItem="DTQ-Gj-vyL" secondAttribute="bottom" id="BZe-3K-MnB"/>
+                            <constraint firstItem="Vvm-B0-wx1" firstAttribute="top" secondItem="BkG-lp-Qri" secondAttribute="bottom" id="IPC-X7-jSt"/>
+                            <constraint firstItem="BkG-lp-Qri" firstAttribute="leading" secondItem="4SH-ZJ-i0c" secondAttribute="leading" id="b4U-t7-XHF"/>
+                            <constraint firstAttribute="trailing" secondItem="BkG-lp-Qri" secondAttribute="trailing" id="zrp-F9-x0g"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="SHT-nP-7Uu">
                         <nil key="title"/>

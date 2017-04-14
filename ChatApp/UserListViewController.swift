@@ -62,7 +62,7 @@ class UserListViewController: UIViewController {
         if let email = currentUser?.email {
             currentUserEmail = email
             self.navigationController?.navigationBar.titleTextAttributes = [ NSFontAttributeName: UIFont(name: "Helvetica-Bold", size: 18)!]
-            self.navigationItem.title = "\(self.profileScreenName)'s Chats"
+            self.navigationItem.title = "Logged in as: \(self.profileScreenName)"
             
             self.profileImageView.loadImageUsingCacheWithUrlString(urlString: self.profileImageURL)
         }
@@ -157,6 +157,10 @@ class UserListViewController: UIViewController {
 //TABLEVIEW DELEGATE AND DATASOURCE
 
 extension UserListViewController : UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Contact List"
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return usersList.count
