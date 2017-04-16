@@ -148,6 +148,7 @@
 				67FB98EF1E977C120078BC0F /* Resources */,
 				3BE1DA76F2AA4BE36EF7A83C /* [CP] Embed Pods Frameworks */,
 				E5307438CA74E39C9D8613F8 /* [CP] Copy Pods Resources */,
+				1A0B4A811EA06F380037D8CA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -214,6 +215,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1A0B4A811EA06F380037D8CA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 77a5b7a45ef7743bb0f140922bd6a32ec3b81d66 af58694bf3c5a5d2a8b1e8e7fc1d73509f57c526e8c1d43154fadfa09a3530df\n";
+		};
 		3520707951EBB98581095826 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -421,14 +435,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = ChatApp/ChatApp.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = ZQ547JDPVM;
 				INFOPLIST_FILE = ChatApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = maxkey.ChatApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8c3afc90-8d98-4bc6-a996-d49ff91a83db";
-				PROVISIONING_PROFILE_SPECIFIER = "Chat App - AppStore";
+				PROVISIONING_PROFILE = "2d0c9d3a-5058-461e-b257-f776fed034ef";
+				PROVISIONING_PROFILE_SPECIFIER = "ChatApp - Dev";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

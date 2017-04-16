@@ -21,7 +21,12 @@ class ProfileViewController: UIViewController {
     var profileEmail : String = ""
     var profileDesc : String = ""
     
-    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView! {
+        didSet{
+            profileImageView.layer.cornerRadius = profileImageView.frame.width/2
+            profileImageView.layer.masksToBounds = true
+        }
+    }
     
     @IBOutlet weak var nameTextField: UITextField!
     

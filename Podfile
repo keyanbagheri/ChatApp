@@ -11,5 +11,7 @@ target 'ChatApp' do
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'Firebase/Messaging'
+  pod 'Crashlytics'
+  pod 'Fabric'
   
 end

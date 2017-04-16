@@ -10,6 +10,9 @@ import UIKit
 import Firebase
 import FirebaseMessaging
 import UserNotifications
+import Fabric
+import Crashlytics
+
 
 
 @UIApplicationMain
@@ -24,10 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let notification = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? UNNotification {
             
-            
-            
         }
         
+        //add crashlytics
+        Fabric.with([Crashlytics.self])
         
         registerPushNotification(application: application)
         

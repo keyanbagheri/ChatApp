@@ -16,7 +16,6 @@ class ImageTableViewCell: UITableViewCell {
 //            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showImage))
 //            chatImageView.isUserInteractionEnabled = true
 //            chatImageView.addGestureRecognizer(tapGestureRecognizer)
-//            
         }
     }
     

@@ -14,7 +14,12 @@ class UserCell: UITableViewCell {
     static let cellNib = UINib(nibName: UserCell.cellIdentifier, bundle: Bundle.main)
     
     
-    @IBOutlet weak var imageViewProfile: UIImageView!
+    @IBOutlet weak var imageViewProfile: UIImageView! {
+        didSet{
+            imageViewProfile.layer.cornerRadius = imageViewProfile.frame.width/2
+            imageViewProfile.layer.masksToBounds = true
+        }
+    }
     
     @IBOutlet weak var labelProfileName: UILabel!
     
